@@ -1,0 +1,780 @@
+<div class="w-full">
+<?php
+if (isset($infoMessage) && $infoMessage != '') {
+    $msg_keys = ['mountain_cam_settings_saved','mountain_cam_invalid_settings','mountain_cam_save_error'];
+    if (in_array($infoMessage, $msg_keys, TRUE)) echo $this->lang->line('building')[$infoMessage];
+}
+$quality_labels = [1=>'SD',2=>'HD',3=>'4K'];
+$quality_label  = $quality_labels[$cam_quality] ?? 'SD';
+$ci =& get_instance();
+$site_lang = $ci->session->userdata('site_lang') ?: 'english';
+$is_fr = ($site_lang === 'french');
+?>
+
+<!-- ════ HERO BANNER ════ -->
+<div style="background:linear-gradient(135deg,#0b1a2e 0%,#132540 45%,#0f2035 100%);border-radius:14px;padding:2.5rem 2rem;margin-bottom:1.5rem;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.07);">
+  <svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;" viewBox="0 0 1000 220" preserveAspectRatio="xMidYMid slice">
+    <circle cx="55" cy="18" r="1.2" fill="white" opacity=".85"/><circle cx="130" cy="50" r="0.8" fill="white" opacity=".6"/>
+    <circle cx="210" cy="16" r="1.3" fill="white" opacity=".8"/><circle cx="300" cy="58" r="0.9" fill="white" opacity=".5"/>
+    <circle cx="390" cy="26" r="1.1" fill="white" opacity=".9"/><circle cx="480" cy="72" r="0.8" fill="white" opacity=".6"/>
+    <circle cx="560" cy="19" r="1.4" fill="white" opacity=".8"/><circle cx="650" cy="54" r="0.9" fill="white" opacity=".7"/>
+    <circle cx="740" cy="30" r="1.1" fill="white" opacity=".9"/><circle cx="840" cy="60" r="0.8" fill="white" opacity=".6"/>
+    <circle cx="920" cy="19" r="1.3" fill="white" opacity=".8"/><circle cx="80" cy="138" r="0.9" fill="white" opacity=".55"/>
+    <circle cx="200" cy="153" r="0.7" fill="white" opacity=".5"/><circle cx="370" cy="143" r="1.0" fill="white" opacity=".65"/>
+    <circle cx="510" cy="158" r="0.8" fill="white" opacity=".55"/><circle cx="650" cy="146" r="1.0" fill="white" opacity=".65"/>
+    <circle cx="780" cy="153" r="0.7" fill="white" opacity=".5"/><circle cx="900" cy="140" r="1.1" fill="white" opacity=".75"/>
+    <polygon points="0,220 80,160 160,195 270,105 380,150 470,80 570,130 680,60 800,110 900,75 1000,100 1000,220" fill="rgba(15,35,65,0.55)"/>
+    <g transform="translate(895,35)" fill="none" stroke="rgba(96,165,250,0.45)" stroke-width="2">
+      <path d="M-18,-18 A25,25 0 0,1 18,-18" stroke-linecap="round"/>
+      <path d="M-30,-30 A42,42 0 0,1 30,-30" stroke-linecap="round" opacity=".6"/>
+      <path d="M-42,-42 A59,59 0 0,1 42,-42" stroke-linecap="round" opacity=".3"/>
+    </g>
+    <circle cx="895" cy="38" r="5" fill="rgba(96,165,250,0.8)"/>
+  </svg>
+  <div style="position:relative;z-index:1;">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;">
+      <div>
+        <h3 style="color:white;font-size:1.75rem;font-weight:bold;text-shadow:0 0 20px rgba(96,165,250,0.5);margin:0;">
+          📷 <?php echo $this->lang->line('building')['mountain_cam_title']; ?>
+        </h3>
+        <p style="color:rgba(255,255,255,0.6);margin:0.4rem 0 0;font-size:0.88rem;max-width:540px;">
+          <?php echo $this->lang->line('building')['mountain_cam_page_intro']; ?>
+        </p>
+      </div>
+      <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
+        <?php if ($is_enabled==1): ?>
+          <span class="badge badge-success" style="font-size:.95rem;padding:.45rem 1rem;">📡 <?php echo $this->lang->line('building')['mountain_cam_on']; ?></span>
+        <?php else: ?>
+          <span class="badge badge-neutral" style="font-size:.95rem;padding:.45rem 1rem;">⏸ <?php echo $this->lang->line('building')['mountain_cam_off']; ?></span>
+        <?php endif; ?>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem;">
+      <?php
+      $hs = [
+        ['📷','#60a5fa',$num_cams.' cam'.($num_cams>1?'s':''),$this->lang->line('building')['mountain_cam_num_cams_label']],
+        ['🔭','#34d399',$quality_label,$this->lang->line('building')['mountain_cam_quality_label']],
+        ['💶','#fbbf24',number_format($actual_daily_cost,0,',',' ').' €',$this->lang->line('building')['mountain_cam_daily_cost_label']],
+        ['⭐','#a78bfa','+'.MOUNTAIN_CAM_REP_BONUS_PER_DAY.' / day',$this->lang->line('building')['mountain_cam_rep_bonus_label']],
+      ];
+      foreach ($hs as $s): ?>
+      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:.9rem .8rem;">
+        <div style="font-size:1.3rem;margin-bottom:.3rem;"><?php echo $s[0]; ?></div>
+        <div style="font-size:1.1rem;font-weight:bold;color:<?php echo $s[1]; ?>;"><?php echo $s[2]; ?></div>
+        <div style="font-size:.72rem;color:rgba(255,255,255,0.5);margin-top:.15rem;"><?php echo $s[3]; ?></div>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</div>
+
+<!-- ════ LIVE FEEDS ════ -->
+<div class="card bg-base-100 shadow-sm mb-4"><div class="card-body">
+  <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;flex-wrap:wrap;">
+    <h4 class="h4" style="margin:0;">
+      <?php if ($is_enabled): ?><span style="color:#ef4444;animation:mcam-blink 1.1s step-end infinite;">●</span>
+      <?php else: ?><span style="color:#555;">●</span><?php endif; ?>
+      <?php echo $is_fr ? 'Flux en direct' : 'Live Feeds'; ?>
+    </h4>
+    <?php if ($is_enabled): ?>
+      <span class="badge badge-error" style="font-size:.68rem;">LIVE</span>
+      <?php if ($stream_mode): ?><span class="badge" style="background:#1d4ed8;color:white;font-size:.68rem;">▶ STREAMING</span><?php endif; ?>
+      <?php if ($night_vision): ?><span class="badge" style="background:#064e3b;color:#6ee7b7;font-size:.68rem;">◑ NIGHT VISION</span><?php endif; ?>
+      <?php if ($weather_overlay): ?><span class="badge" style="background:#1e3a5f;color:#93c5fd;font-size:.68rem;">🌡 WEATHER</span><?php endif; ?>
+      <?php if ($social_media): ?><span class="badge" style="background:#1e1b4b;color:#a5b4fc;font-size:.68rem;">📲 SOCIAL</span><?php endif; ?>
+    <?php else: ?><span class="badge badge-neutral" style="font-size:.68rem;">OFFLINE</span><?php endif; ?>
+  </div>
+  <div id="mcam-grid" style="display:grid;gap:8px;">
+    <?php for ($ci_idx=0;$ci_idx<$num_cams;$ci_idx++): ?>
+    <div class="mcam-cell" data-cam-index="<?php echo $ci_idx; ?>"
+         style="position:relative;cursor:pointer;border-radius:6px;overflow:hidden;background:#060606;border:1px solid rgba(255,255,255,0.1);"
+         title="<?php echo $is_fr ? 'Cliquer pour agrandir' : 'Click to enlarge'; ?>">
+      <div style="position:relative;padding-top:56.25%;">
+        <canvas id="mcam-canvas-<?php echo $ci_idx; ?>" width="640" height="360"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;"></canvas>
+      </div>
+      <div class="mcam-hov" style="position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .2s;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+        <span style="color:white;font-size:2.2rem;opacity:0;transition:opacity .2s;text-shadow:0 2px 8px rgba(0,0,0,0.8);">⛶</span>
+      </div>
+    </div>
+    <?php endfor; ?>
+  </div>
+  <p style="font-size:.74rem;color:rgba(128,128,128,0.55);margin-top:.75rem;">
+    <?php echo $is_fr
+      ? 'Simulation de flux webcam en direct. Cliquez pour agrandir · Flèches pour naviguer · Échap pour fermer.'
+      : 'Simulated live webcam feeds. Click to enlarge · Arrow keys to navigate · Esc to close.'; ?>
+  </p>
+</div></div>
+
+<!-- ════ FULLSCREEN MODAL (no inline onclick — all wired in JS) ════ -->
+<div id="mcam-modal" style="display:none;opacity:0;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.94);align-items:center;justify-content:center;padding:3rem 5rem;box-sizing:border-box;transition:opacity .22s ease;">
+  <div id="mcam-modal-inner" style="position:relative;width:100%;max-width:940px;">
+    <button id="mcam-close" style="position:absolute;top:-38px;right:0;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.8);font-size:1.4rem;cursor:pointer;border-radius:6px;width:36px;height:36px;line-height:36px;text-align:center;transition:background .15s;" title="Close (Esc)">✕</button>
+    <button id="mcam-prev" style="position:absolute;left:-54px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:white;font-size:1.5rem;cursor:pointer;border-radius:50%;width:42px;height:42px;line-height:42px;text-align:center;transition:background .15s;z-index:2;" title="Previous">‹</button>
+    <button id="mcam-next" style="position:absolute;right:-54px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:white;font-size:1.5rem;cursor:pointer;border-radius:50%;width:42px;height:42px;line-height:42px;text-align:center;transition:background .15s;z-index:2;" title="Next">›</button>
+    <div style="position:relative;padding-top:56.25%;border-radius:8px;overflow:hidden;background:#040404;box-shadow:0 24px 64px rgba(0,0,0,0.85);">
+      <canvas id="mcam-modal-canvas" width="1280" height="720"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;"></canvas>
+    </div>
+    <div id="mcam-modal-label" style="color:rgba(255,255,255,0.45);font-size:.78rem;margin-top:.5rem;text-align:center;font-family:monospace;letter-spacing:.04em;"></div>
+  </div>
+</div>
+
+<!-- ════ SETTINGS + KEY FIGURES ════ -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;" class="mcam-two-col">
+  <div class="card bg-base-100 shadow-sm"><div class="card-body">
+    <h4 class="h4"><?php echo $this->lang->line('building')['mountain_cam_settings_title']; ?></h4>
+    <form method="post" action="<?php echo base_url('mountain_cam_controller/save'); ?>">
+      <input type="hidden" name="mountain_cam_form" value="1">
+      <div class="mb-3">
+        <div class="flex items-center gap-2">
+          <input class="toggle" type="checkbox" id="is_enabled" name="is_enabled" value="1" <?php echo $is_enabled==1?'checked':''; ?>>
+          <label for="is_enabled"><?php echo $this->lang->line('building')['mountain_cam_enable_label']; ?></label>
+        </div>
+        <div class="text-sm opacity-60"><?php echo $this->lang->line('building')['mountain_cam_enable_help']; ?></div>
+      </div>
+      <div class="mb-3">
+        <label for="num_cams" class="form-label"><?php echo $this->lang->line('building')['mountain_cam_num_cams_label']; ?> <small class="opacity-60">(<?php echo $min_cams; ?>–<?php echo $max_cams; ?>)</small></label>
+        <input type="number" id="num_cams" name="num_cams" class="input input-sm" style="max-width:80px;" min="<?php echo $min_cams; ?>" max="<?php echo $max_cams; ?>" value="<?php echo (int)$num_cams; ?>">
+        <div class="text-sm opacity-60"><?php echo $this->lang->line('building')['mountain_cam_num_cams_help']; ?></div>
+      </div>
+      <div class="mb-3">
+        <label class="font-bold"><?php echo $this->lang->line('building')['mountain_cam_quality_label']; ?></label>
+        <div><?php foreach($valid_qualities as $q): ?>
+          <div class="form-check inline-flex items-center gap-2">
+            <input class="radio" type="radio" name="cam_quality" id="cam_quality_<?php echo $q; ?>" value="<?php echo $q; ?>" <?php echo $q===$cam_quality?'checked':''; ?>>
+            <label class="cursor-pointer" for="cam_quality_<?php echo $q; ?>"><?php echo $this->lang->line('building')['mountain_cam_quality_'.$q]; ?></label>
+          </div>
+        <?php endforeach; ?></div>
+        <div class="text-sm opacity-60"><?php echo $this->lang->line('building')['mountain_cam_quality_help']; ?></div>
+      </div>
+      <?php
+      $toggles = [
+        ['stream_mode',   $stream_mode,   'mountain_cam_stream_label',       'mountain_cam_stream_help'],
+        ['social_media',  $social_media,  'mountain_cam_social_label',       'mountain_cam_social_help'],
+        ['night_vision',  $night_vision,  'mountain_cam_night_vision_label', 'mountain_cam_night_vision_help'],
+        ['weather_overlay',$weather_overlay,'mountain_cam_weather_overlay_label','mountain_cam_weather_overlay_help'],
+      ];
+      foreach ($toggles as $tg): ?>
+      <div class="mb-3">
+        <div class="flex items-center gap-2">
+          <input class="toggle" type="checkbox" id="<?php echo $tg[0]; ?>" name="<?php echo $tg[0]; ?>" value="1" <?php echo $tg[1]==1?'checked':''; ?>>
+          <label for="<?php echo $tg[0]; ?>"><?php echo $this->lang->line('building')[$tg[2]]; ?></label>
+        </div>
+        <div class="text-sm opacity-60"><?php echo $this->lang->line('building')[$tg[3]]; ?></div>
+      </div>
+      <?php endforeach; ?>
+      <button type="submit" class="btn btn-primary btn-sm"><?php echo $this->lang->line('building')['mountain_cam_save_btn']; ?></button>
+    </form>
+  </div></div>
+
+  <div class="card bg-base-100 shadow-sm"><div class="card-body">
+    <h4 class="h4"><?php echo $this->lang->line('building')['mountain_cam_key_figures']; ?></h4>
+    <table class="table table-sm" style="max-width:520px;">
+      <?php
+      $on_badge  = '<span class="badge badge-success">'.$this->lang->line('building')['mountain_cam_on'].'</span>';
+      $off_badge = '<span class="badge badge-neutral">'.$this->lang->line('building')['mountain_cam_off'].'</span>';
+      $rows = [
+        [$this->lang->line('building')['mountain_cam_status_label'], $is_enabled==1?$on_badge:$off_badge],
+        [$this->lang->line('building')['mountain_cam_num_cams_label'], '<strong>'.(int)$num_cams.'</strong>'],
+        [$this->lang->line('building')['mountain_cam_quality_label'], '<strong>'.$this->lang->line('building')['mountain_cam_quality_'.$cam_quality].'</strong>'],
+        [$this->lang->line('building')['mountain_cam_visitor_boost_label'], $this->lang->line('building')['mountain_cam_visitor_boost_desc']],
+        [$this->lang->line('building')['mountain_cam_daily_cost_label'], '<strong>'.number_format($actual_daily_cost,0,',',' ').' €</strong>'],
+        [$this->lang->line('building')['mountain_cam_rep_bonus_label'], '+'.MOUNTAIN_CAM_REP_BONUS_PER_DAY.' '.$this->lang->line('building')['mountain_cam_rep_bonus_per_day']],
+        [$this->lang->line('building')['mountain_cam_stream_label'], ($stream_mode?$on_badge.' <small class="opacity-60">(+'. (int)((MOUNTAIN_CAM_STREAM_VISITOR_MULT-1)*100).'% '.$this->lang->line('building')['mountain_cam_stream_visitor_note'].')</small>':$off_badge)],
+        [$this->lang->line('building')['mountain_cam_social_label'], ($social_media?$on_badge.' <small class="opacity-60">(+'.MOUNTAIN_CAM_SOCIAL_REP_BONUS.' '.$this->lang->line('building')['mountain_cam_rep_bonus_per_day'].')</small>':$off_badge)],
+        [$this->lang->line('building')['mountain_cam_night_vision_label'], ($night_vision?$on_badge.' <small class="opacity-60">(+'. (int)((MOUNTAIN_CAM_NIGHT_VISION_VISITOR_MULT-1)*100).'% '.$this->lang->line('building')['mountain_cam_stream_visitor_note'].')</small>':$off_badge)],
+        [$this->lang->line('building')['mountain_cam_weather_overlay_label'], ($weather_overlay?$on_badge.' <small class="opacity-60">(+'.MOUNTAIN_CAM_WEATHER_OVERLAY_REP_BONUS.' '.$this->lang->line('building')['mountain_cam_rep_bonus_per_day'].')</small>':$off_badge)],
+      ];
+      foreach ($rows as $r): ?><tr><td><?php echo $r[0]; ?></td><td><?php echo $r[1]; ?></td></tr><?php endforeach; ?>
+    </table>
+  </div></div>
+</div>
+
+<div class="card bg-base-100 shadow-sm mb-4"><div class="card-body" style="max-width:700px;">
+  <h4 class="h4"><?php echo $this->lang->line('building')['mountain_cam_how_it_works']; ?></h4>
+  <p><?php echo $this->lang->line('building')['mountain_cam_how_it_works_desc']; ?></p>
+  <ul>
+    <?php foreach(['mountain_cam_mechanic_visitors','mountain_cam_mechanic_cost','mountain_cam_mechanic_reputation','mountain_cam_mechanic_quality','mountain_cam_mechanic_stream','mountain_cam_mechanic_social','mountain_cam_mechanic_night_vision','mountain_cam_mechanic_weather_overlay'] as $k): ?>
+    <li><?php echo $this->lang->line('building')[$k]; ?></li>
+    <?php endforeach; ?>
+  </ul>
+</div></div>
+
+<style>
+@keyframes mcam-blink{0%,100%{opacity:1}50%{opacity:0}}
+@media(max-width:640px){
+  .mcam-two-col{grid-template-columns:1fr !important;}
+  #mcam-prev,#mcam-next{display:none !important;}
+  #mcam-modal{padding:1rem !important;}
+}
+.mcam-cell:hover .mcam-hov{background:rgba(0,0,0,0.32) !important;}
+.mcam-cell:hover .mcam-hov span{opacity:1 !important;}
+#mcam-close:hover,#mcam-prev:hover,#mcam-next:hover{background:rgba(255,255,255,0.25) !important;}
+</style>
+
+<!-- ════ WEBCAM ENGINE v2 ════ -->
+<script>
+(function(){
+'use strict';
+
+/* ── PHP config ── */
+var MCAM={
+  isEnabled:      <?php echo (int)$is_enabled; ?>,
+  numCams:        <?php echo (int)$num_cams; ?>,
+  quality:        <?php echo (int)$cam_quality; ?>,
+  streamMode:     <?php echo (int)$stream_mode; ?>,
+  nightVision:    <?php echo (int)$night_vision; ?>,
+  weatherOverlay: <?php echo (int)$weather_overlay; ?>,
+  social:         <?php echo (int)$social_media; ?>,
+  lang:           '<?php echo $is_fr?"fr":"en"; ?>'
+};
+
+var CAM_NAMES={
+  en:['Summit Cam','Base Lodge','Main Run','Gondola Top','Beginner Slope',
+      'Mid-Mountain','Terrain Park','Valley View','Apres Zone','Back Bowl'],
+  fr:['Camera sommet','Batiment accueil','Piste principale','Sommet telecabine',
+      'Zone debutants','Mi-montagne','Snowpark','Vue vallee','Zone apres-ski','Cuvette arriere']
+};
+var camNames=CAM_NAMES[MCAM.lang]||CAM_NAMES.en;
+
+/* ── Scene profiles ── */
+var P=[
+  {hz:0.30,skyT:'#0d1b2a',skyB:'#3d6b8e',mtns:[[0,.60],[.10,.92],[.22,.72],[.36,1.0],[.50,.78],[.65,.95],[.80,.68],[.92,.82],[1,.58]],trees:5,skiers:2,zone:'sides'},
+  {hz:0.44,skyT:'#2a4a7f',skyB:'#7ba3c8',mtns:[[0,.38],[.15,.68],[.30,.50],[.50,.80],[.70,.55],[.87,.65],[1,.42]],trees:18,skiers:6,zone:'both',lodge:true},
+  {hz:0.36,skyT:'#1a3a5c',skyB:'#5080a8',mtns:[[0,.50],[.12,.80],[.30,.60],[.50,.90],[.70,.62],[.90,.75],[1,.52]],trees:12,skiers:5,zone:'sides'},
+  {hz:0.26,skyT:'#0a1520',skyB:'#2a5070',mtns:[[0,.72],[.08,1.0],[.20,.82],[.40,1.0],[.55,.88],[.70,1.0],[.85,.80],[1,.72]],trees:4,skiers:2,zone:'right'},
+  {hz:0.50,skyT:'#3a6080',skyB:'#8abcda',mtns:[[0,.28],[.20,.50],[.45,.32],[.65,.55],[.85,.38],[1,.28]],trees:24,skiers:7,zone:'both'},
+  {hz:0.38,skyT:'#1c3a5a',skyB:'#4878a0',mtns:[[0,.55],[.15,.85],[.32,.65],[.50,.90],[.68,.72],[.85,.85],[1,.58]],trees:14,skiers:4,zone:'sides'},
+  {hz:0.40,skyT:'#2a4a7a',skyB:'#6090ba',mtns:[[0,.45],[.18,.72],[.38,.52],[.55,.78],[.75,.55],[.90,.65],[1,.45]],trees:10,skiers:3,zone:'left',park:true},
+  {hz:0.46,skyT:'#3a5878',skyB:'#8aaccc',mtns:[[0,.38],[.10,.60],[.25,.45],[.42,.72],[.58,.52],[.75,.65],[.90,.45],[1,.38]],trees:22,skiers:4,zone:'both'},
+  {hz:0.46,skyT:'#2e4a6a',skyB:'#6a8aaa',mtns:[[0,.35],[.15,.55],[.30,.40],[.50,.60],[.70,.42],[.87,.52],[1,.35]],trees:16,skiers:5,zone:'sides',lodge:true},
+  {hz:0.32,skyT:'#0e2035',skyB:'#3e6085',mtns:[[0,.65],[.10,.85],[.25,.70],[.40,.95],[.55,.78],[.70,.90],[.85,.72],[1,.65]],trees:6,skiers:3,zone:'right'}
+];
+
+/* Lift cable definitions per camera (x1,y1=bottom, x2,y2=top, fraction coords) */
+var LIFTS=[
+  {x1:.48,y1:.97,x2:.53,y2:.04,n:4},{x1:.28,y1:.96,x2:.50,y2:.12,n:5},
+  {x1:.14,y1:.93,x2:.38,y2:.07,n:4},{x1:.44,y1:.92,x2:.54,y2:.02,n:3},
+  {x1:.56,y1:.96,x2:.64,y2:.52,n:2},{x1:.40,y1:.94,x2:.54,y2:.14,n:4},
+  {x1:.62,y1:.96,x2:.70,y2:.43,n:2},{x1:.20,y1:.92,x2:.44,y2:.09,n:4},
+  {x1:.34,y1:.97,x2:.54,y2:.18,n:4},{x1:.49,y1:.96,x2:.54,y2:.04,n:5}
+];
+
+/* ── Grid layout ── */
+var grid=document.getElementById('mcam-grid');
+if(grid){var cols=MCAM.numCams<=1?1:MCAM.numCams<=4?2:3;grid.style.gridTemplateColumns='repeat('+cols+',1fr)';}
+
+/* ════════════════════════════════════════════════════
+   WebcamRenderer
+   ════════════════════════════════════════════════════ */
+function WCR(canvas,idx){
+  this.cv=canvas; this.ctx=canvas.getContext('2d');
+  this.W=canvas.width; this.H=canvas.height;
+  this.idx=idx%P.length; this.p=P[this.idx];
+  this.frame=0; this.recBlink=true; this.recTmr=0;
+  this.flakes=[]; this.skiers=[]; this.gondolas=[]; this.clouds=[];
+  this.windStr=0; this.windDrift=0; this.windTmr=0;
+  this.motionFlash=0;
+  this._seed=(idx*12345+9876)|0; this._raf=null;
+  this._init();
+  this._tick=this._tick.bind(this);
+  this._raf=requestAnimationFrame(this._tick);
+}
+
+WCR.prototype._sr=function(n){return(((this._seed^(n*1664525+1013904223))>>>0)&0x7fffffff)/0x7fffffff;};
+
+WCR.prototype._init=function(){
+  /* flakes */
+  var c=52+Math.floor(this._sr(99)*38);
+  for(var i=0;i<c;i++)this.flakes.push({x:Math.random()*this.W,y:Math.random()*this.H,r:.5+Math.random()*2.2,spd:.35+Math.random()*1.5,drift:(Math.random()-.5)*.4,op:.3+Math.random()*.65});
+  /* skiers */
+  if(MCAM.isEnabled){for(var j=0;j<this.p.skiers;j++)this.skiers.push(this._mkSk());}
+  /* gondolas */
+  var lft=LIFTS[this.idx];
+  if(lft){for(var k=0;k<5;k++)this.gondolas.push({t:k/5,spd:.00085+Math.random()*.0003});}
+  /* clouds */
+  var nc=2+Math.floor(this._sr(77)*3);
+  for(var m=0;m<nc;m++){
+    var hy=this.H*this.p.hz;
+    this.clouds.push({x:Math.random()*this.W,y:this._sr(m*23+5)*hy*.72,w:65+this._sr(m*31+7)*90,spd:.08+this._sr(m*17+3)*.18,op:.25+this._sr(m*11+9)*.32});
+  }
+};
+
+WCR.prototype._mkSk=function(){
+  var hzY=this.H*this.p.hz,dir=Math.random()<.5?1:-1;
+  var sx=dir>0?-22:this.W+22,sy=hzY+8+Math.random()*(this.H-hzY-22);
+  var t=(sy-hzY)/(this.H-hzY),sc=.32+t*.85;
+  var cls=['#e74c3c','#3498db','#f39c12','#2ecc71','#9b59b6','#e67e22','#1abc9c','#e91e63'];
+  return{x:sx,y:sy,vx:dir*(.7+Math.random()*1.8)*sc,vy:(.2+Math.random()*.42)*sc,sc:sc,col:cls[Math.floor(Math.random()*cls.length)],wb:Math.random()*Math.PI*2,wbS:.04+Math.random()*.07};
+};
+
+/* ── sky time awareness ── */
+WCR.prototype._skyColors=function(){
+  var h=new Date().getHours(),nv=MCAM.nightVision;
+  if(nv)return{t:'#000a00',b:'#001500'};
+  if(h>=5&&h<7) return{t:'#180820',b:'#c8603a'};  /* dawn  */
+  if(h>=7&&h<17)return null;                        /* day – use profile */
+  if(h>=17&&h<20)return{t:'#1e0f18',b:'#b85025'};  /* dusk  */
+  return{t:'#060b18',b:'#0c1a2e'};                  /* night */
+};
+
+/* ── Drawing ── */
+WCR.prototype._drawBg=function(){
+  var ctx=this.ctx,W=this.W,H=this.H,p=this.p,nv=MCAM.nightVision;
+  var hzY=H*p.hz,sc=this._skyColors();
+  var sT=sc?sc.t:p.skyT, sB=sc?sc.b:p.skyB;
+
+  /* sky */
+  var sg=ctx.createLinearGradient(0,0,0,hzY+10);
+  sg.addColorStop(0,sT); sg.addColorStop(1,sB);
+  ctx.fillStyle=sg; ctx.fillRect(0,0,W,hzY+10);
+
+  /* far mountains */
+  ctx.fillStyle=nv?'#001200':'#1e2d3d';
+  ctx.beginPath(); ctx.moveTo(0,hzY);
+  for(var i=0;i<p.mtns.length;i++)ctx.lineTo(W*p.mtns[i][0],hzY-hzY*p.mtns[i][1]);
+  ctx.lineTo(W,hzY); ctx.closePath(); ctx.fill();
+
+  /* snow caps on mountain peaks */
+  ctx.fillStyle=nv?'rgba(0,55,0,.55)':'rgba(230,242,255,.6)';
+  ctx.beginPath(); ctx.moveTo(0,hzY);
+  for(var j=0;j<p.mtns.length;j++)ctx.lineTo(W*p.mtns[j][0],hzY-hzY*p.mtns[j][1]+10);
+  ctx.lineTo(W,hzY); ctx.closePath(); ctx.fill();
+
+  /* snow ground */
+  var gg=ctx.createLinearGradient(0,hzY,0,H);
+  gg.addColorStop(0,nv?'#002200':'#ddeaf5'); gg.addColorStop(1,nv?'#001600':'#c4d8ec');
+  ctx.fillStyle=gg; ctx.fillRect(0,hzY,W,H-hzY);
+
+  /* subtle slope contour lines */
+  ctx.save(); ctx.strokeStyle=nv?'rgba(0,80,0,.2)':'rgba(175,210,238,.38)'; ctx.lineWidth=1;
+  for(var k=1;k<=5;k++){
+    var ly=hzY+(H-hzY)*k/6,off=(k%2===0?1:-1)*4;
+    ctx.beginPath(); ctx.moveTo(0,ly);
+    ctx.bezierCurveTo(W*.3,ly+off,W*.7,ly-off,W,ly); ctx.stroke();
+  }
+  ctx.restore();
+};
+
+WCR.prototype._drawClouds=function(){
+  if(MCAM.nightVision)return;
+  var ctx=this.ctx; ctx.save();
+  for(var i=0;i<this.clouds.length;i++){
+    var c=this.clouds[i],r=c.w/4;
+    ctx.globalAlpha=c.op; ctx.fillStyle='#fff';
+    ctx.beginPath();
+    ctx.ellipse(c.x,     c.y,      r*1.6,r*.68,0,0,Math.PI*2);
+    ctx.ellipse(c.x-r,   c.y+r*.2, r,    r*.60,0,0,Math.PI*2);
+    ctx.ellipse(c.x+r,   c.y+r*.2, r*1.1,r*.62,0,0,Math.PI*2);
+    ctx.fill();
+  }
+  ctx.restore();
+};
+
+WCR.prototype._drawTrees=function(){
+  var ctx=this.ctx,W=this.W,H=this.H,p=this.p,nv=MCAM.nightVision;
+  var hzY=H*p.hz,tc=nv?'#003800':'#1e3a18',snC=nv?'rgba(0,55,0,.5)':'rgba(215,234,250,.72)',trC=nv?'#001a00':'#4a2d0e';
+  var zone=p.zone||'sides',pos=[];
+  for(var i=0;i<p.trees;i++){
+    var t=this._sr(i*17+3);
+    var side=zone==='left'?0:zone==='right'?1:zone==='both'?(i%2):(i<Math.ceil(p.trees/2)?0:1);
+    var xb=side===0?W*(0.02+this._sr(i*11+7)*.16):W*(0.82+this._sr(i*13+5)*.16);
+    var y=hzY+5+(H-hzY-28)*t,sc2=.28+(y-hzY)/(H-hzY)*.82;
+    pos.push({x:xb,y:y,sc:sc2});
+  }
+  pos.sort(function(a,b){return a.y-b.y;});
+  for(var j=0;j<pos.length;j++){
+    var x=pos[j].x,y2=pos[j].y,sc=pos[j].sc,th=26*sc,tw=12*sc;
+    ctx.fillStyle=trC; ctx.fillRect(x-1.8*sc,y2,3.4*sc,5*sc);
+    for(var tier=0;tier<3;tier++){
+      var ty=y2-th*.38*tier,ttw=tw*(1-tier*.22),tth=th*.42;
+      ctx.fillStyle=tc; ctx.beginPath(); ctx.moveTo(x,ty-tth); ctx.lineTo(x+ttw,ty); ctx.lineTo(x-ttw,ty); ctx.closePath(); ctx.fill();
+      ctx.fillStyle=snC; ctx.beginPath(); ctx.moveTo(x,ty-tth); ctx.lineTo(x+ttw*.52,ty-tth*.5); ctx.lineTo(x-ttw*.52,ty-tth*.5); ctx.closePath(); ctx.fill();
+    }
+  }
+};
+
+WCR.prototype._drawLift=function(){
+  var lft=LIFTS[this.idx]; if(!lft)return;
+  var ctx=this.ctx,W=this.W,H=this.H,nv=MCAM.nightVision;
+  var x1=W*lft.x1,y1=H*lft.y1,x2=W*lft.x2,y2=H*lft.y2;
+  var dx=x2-x1,dy=y2-y1;
+
+  /* Cable */
+  ctx.save();
+  ctx.strokeStyle=nv?'rgba(0,90,0,.65)':'rgba(55,55,55,.75)'; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  /* return cable (parallel, slight offset) */
+  ctx.strokeStyle=nv?'rgba(0,70,0,.4)':'rgba(55,55,55,.4)'; ctx.lineWidth=1;
+  var perpX=dy/Math.sqrt(dx*dx+dy*dy)*5, perpY=-dx/Math.sqrt(dx*dx+dy*dy)*5;
+  ctx.beginPath(); ctx.moveTo(x1+perpX,y1+perpY); ctx.lineTo(x2+perpX,y2+perpY); ctx.stroke();
+
+  /* Towers */
+  ctx.strokeStyle=nv?'rgba(0,65,0,.9)':'rgba(75,75,75,.95)'; ctx.lineWidth=2;
+  for(var t=0;t<lft.n;t++){
+    var tp=(t+1)/(lft.n+1);
+    var tx=x1+dx*tp,ty=y1+dy*tp;
+    var thgt=12+tp*10;
+    ctx.beginPath(); ctx.moveTo(tx,ty); ctx.lineTo(tx,ty+thgt); ctx.stroke();
+    ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.moveTo(tx-5,ty+2); ctx.lineTo(tx+5,ty+2); ctx.stroke();
+    ctx.lineWidth=2;
+  }
+
+  /* Gondolas / chairs */
+  for(var k=0;k<this.gondolas.length;k++){
+    var g=this.gondolas[k];
+    var gx=x1+dx*g.t, gy=y1+dy*g.t;
+    var sc=.45+g.t*.55, gw=10*sc, gh=7*sc;
+    /* hanger wire */
+    ctx.strokeStyle=nv?'rgba(0,55,0,.8)':'rgba(50,50,50,.85)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(gx,gy); ctx.lineTo(gx,gy+gh*.8); ctx.stroke();
+    /* chair/gondola body */
+    ctx.fillStyle=nv?'#003300':'#d0d5dc';
+    ctx.fillRect(gx-gw/2,gy+gh*.8,gw,gh);
+    /* window glint */
+    if(!nv){ctx.fillStyle='rgba(160,210,255,.6)'; ctx.fillRect(gx-gw*.3,gy+gh*.9,gw*.25,gh*.5);}
+  }
+  ctx.restore();
+};
+
+WCR.prototype._drawLodge=function(){
+  if(!this.p.lodge)return;
+  var ctx=this.ctx,W=this.W,H=this.H,p=this.p,nv=MCAM.nightVision;
+  var hzY=H*p.hz,lx=W*.72,ly=hzY+(H-hzY)*.62,lw=W*.14,lh=(H-hzY)*.28;
+  ctx.fillStyle=nv?'#002200':'#8B6F47'; ctx.fillRect(lx,ly,lw,lh);
+  ctx.fillStyle=nv?'#001800':'#5D4037';
+  ctx.beginPath(); ctx.moveTo(lx-lw*.08,ly); ctx.lineTo(lx+lw/2,ly-lh*.45); ctx.lineTo(lx+lw*1.08,ly); ctx.closePath(); ctx.fill();
+  ctx.fillStyle=nv?'rgba(0,55,0,.5)':'rgba(215,232,248,.88)';
+  ctx.beginPath(); ctx.moveTo(lx-lw*.04,ly); ctx.lineTo(lx+lw/2,ly-lh*.42); ctx.lineTo(lx+lw*1.04,ly); ctx.closePath(); ctx.fill();
+  var wc=nv?'#004800':(MCAM.isEnabled?'#f8c94a':'#999'),ws=lw*.18;
+  ctx.fillStyle=wc;
+  ctx.fillRect(lx+lw*.15,ly+lh*.2,ws,ws); ctx.fillRect(lx+lw*.55,ly+lh*.2,ws,ws);
+  ctx.fillRect(lx+lw*.15,ly+lh*.55,ws,ws); ctx.fillRect(lx+lw*.55,ly+lh*.55,ws,ws);
+  /* chimney smoke */
+  if(!nv){
+    ctx.fillStyle=nv?'#003300':'#888';
+    var cx=lx+lw*.25,cBase=ly-lh*.4;
+    ctx.fillRect(cx,cBase-8,5,8);
+    ctx.save(); ctx.globalAlpha=.25;
+    var sf=Math.sin(this.frame*.04)*.8;
+    ctx.beginPath(); ctx.arc(cx+2+sf,cBase-14,4,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx+3+sf*1.5,cBase-21,5.5,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+};
+
+WCR.prototype._drawPark=function(){
+  if(!this.p.park)return;
+  var ctx=this.ctx,W=this.W,H=this.H,p=this.p,nv=MCAM.nightVision;
+  var hzY=H*p.hz,by=hzY+(H-hzY)*.75;
+  ctx.fillStyle=nv?'rgba(0,55,0,.8)':'rgba(195,218,242,.92)';
+  ctx.beginPath(); ctx.moveTo(W*.25,by); ctx.lineTo(W*.38,by); ctx.lineTo(W*.35,by-H*.07); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(W*.55,by); ctx.lineTo(W*.70,by); ctx.lineTo(W*.67,by-H*.05); ctx.closePath(); ctx.fill();
+  ctx.strokeStyle=nv?'#004400':'#6b7f90'; ctx.lineWidth=3;
+  ctx.beginPath(); ctx.moveTo(W*.40,by-H*.04); ctx.lineTo(W*.52,by-H*.02); ctx.stroke();
+  /* box */
+  ctx.fillStyle=nv?'#003300':'#a0b0c0';
+  ctx.fillRect(W*.45,by-H*.025,W*.06,H*.025);
+};
+
+WCR.prototype._drawFog=function(){
+  var ctx=this.ctx,W=this.W,H=this.H,p=this.p,nv=MCAM.nightVision;
+  var hzY=H*p.hz,fogH=hzY*.35;
+  var op=.12+.06*Math.sin(this.frame*.008);
+  var fg=ctx.createLinearGradient(0,hzY-fogH,0,hzY+fogH*.3);
+  fg.addColorStop(0,'transparent');
+  fg.addColorStop(.5,nv?'rgba(0,30,0,'+op+')':'rgba(210,230,248,'+op+')');
+  fg.addColorStop(1,'transparent');
+  ctx.fillStyle=fg; ctx.fillRect(0,hzY-fogH,W,fogH+fogH*.3);
+};
+
+WCR.prototype._drawFlakes=function(){
+  var ctx=this.ctx,nv=MCAM.nightVision; ctx.save();
+  for(var i=0;i<this.flakes.length;i++){
+    var f=this.flakes[i];
+    ctx.globalAlpha=f.op; ctx.fillStyle=nv?'#00dd44':'#fff';
+    ctx.beginPath(); ctx.arc(f.x,f.y,f.r,0,Math.PI*2); ctx.fill();
+  }
+  ctx.restore();
+};
+
+WCR.prototype._drawSkier=function(sk){
+  var ctx=this.ctx,s=sk.sc,nv=MCAM.nightVision,dir=sk.vx>=0?1:-1;
+  ctx.save(); ctx.translate(sk.x,sk.y);
+  ctx.fillStyle=sk.col;
+  ctx.beginPath(); ctx.ellipse(0,0,4.2*s,5.8*s,.2*dir,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle=nv?'#00bb44':'#f5cba7';
+  ctx.beginPath(); ctx.arc(0,-7*s,2.8*s,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle=sk.col; ctx.beginPath(); ctx.arc(0,-7.5*s,3*s,Math.PI,0); ctx.fill();
+  ctx.strokeStyle=nv?'#003300':'#1a1a2e'; ctx.lineWidth=1.7*s; ctx.lineCap='round';
+  var lb=Math.sin(sk.wb)*1.8*s;
+  ctx.beginPath();
+  ctx.moveTo(-5.5*s,4.5*s+lb); ctx.lineTo(8.5*s*dir,6.5*s);
+  ctx.moveTo(-2*s,4.5*s-lb); ctx.lineTo(5*s*dir,6.5*s);
+  ctx.stroke();
+  ctx.strokeStyle=nv?'#002200':'#888'; ctx.lineWidth=.9*s;
+  ctx.beginPath(); ctx.moveTo(4.5*s*dir,-1.5*s); ctx.lineTo(8*s*dir,8*s); ctx.stroke();
+  ctx.restore();
+};
+
+WCR.prototype._applyNV=function(){
+  if(!MCAM.nightVision)return;
+  var ctx=this.ctx,W=this.W,H=this.H;
+  ctx.save(); ctx.globalCompositeOperation='screen'; ctx.fillStyle='rgba(0,32,0,.26)'; ctx.fillRect(0,0,W,H); ctx.restore();
+  ctx.save(); ctx.globalAlpha=.1; ctx.fillStyle='#000';
+  for(var y=0;y<H;y+=3)ctx.fillRect(0,y,W,1);
+  ctx.restore();
+  ctx.save();
+  var vg=ctx.createRadialGradient(W/2,H/2,H*.28,W/2,H/2,H*.78);
+  vg.addColorStop(0,'transparent'); vg.addColorStop(1,'rgba(0,6,0,.52)');
+  ctx.fillStyle=vg; ctx.fillRect(0,0,W,H); ctx.restore();
+};
+
+WCR.prototype._applyVig=function(){
+  if(MCAM.nightVision)return;
+  var ctx=this.ctx,W=this.W,H=this.H; ctx.save();
+  var vg=ctx.createRadialGradient(W/2,H/2,H*.30,W/2,H/2,H*.82);
+  vg.addColorStop(0,'transparent'); vg.addColorStop(1,'rgba(0,0,0,.36)');
+  ctx.fillStyle=vg; ctx.fillRect(0,0,W,H); ctx.restore();
+};
+
+WCR.prototype._drawHUD=function(){
+  var ctx=this.ctx,W=this.W,H=this.H,nv=MCAM.nightVision,now=new Date();
+  var tc=nv?'#00ff55':'#fff',shc=nv?'rgba(0,28,0,.9)':'rgba(0,0,0,.75)',fs=Math.round(W*.026);
+  ctx.save();
+  if(nv){ctx.shadowBlur=5;ctx.shadowColor='#00ff55';}
+
+  /* Camera name */
+  ctx.font='bold '+fs+'px monospace'; ctx.textBaseline='top'; ctx.textAlign='left';
+  ctx.fillStyle=shc; ctx.fillText('\u25A0 '+camNames[this.idx],9,9);
+  ctx.fillStyle=tc;  ctx.fillText('\u25A0 '+camNames[this.idx],8,8);
+
+  /* Quality badge */
+  ctx.font='bold '+Math.round(fs*.88)+'px monospace'; ctx.textAlign='right';
+  var ql=['','SD','HD','4K'][MCAM.quality]||'SD';
+  var qc=MCAM.quality===3?'#fbbf24':MCAM.quality===2?'#60a5fa':tc;
+  ctx.fillStyle=shc; ctx.fillText(ql,W-7,9); ctx.fillStyle=qc; ctx.fillText(ql,W-8,8);
+
+  /* REC / LIVE blink */
+  this.recTmr++; if(this.recTmr>=58){this.recBlink=!this.recBlink;this.recTmr=0;}
+  ctx.font='bold '+Math.round(fs*.84)+'px monospace'; ctx.textAlign='right';
+  if(MCAM.isEnabled){
+    if(this.recBlink){
+      var rl=MCAM.streamMode?'\u25CF LIVE':'\u25CF REC';
+      ctx.fillStyle=shc; ctx.fillText(rl,W-7,fs+12); ctx.fillStyle='#ef4444'; ctx.fillText(rl,W-8,fs+11);
+    }
+  }else{ctx.fillStyle='rgba(170,170,170,.7)'; ctx.fillText('\u25CF OFFLINE',W-8,fs+11);}
+
+  /* Timestamp */
+  ctx.font=Math.round(fs*.84)+'px monospace'; ctx.textBaseline='bottom'; ctx.textAlign='right';
+  var ts=_fmt(now);
+  ctx.fillStyle=shc; ctx.fillText(ts,W-7,H-7); ctx.fillStyle=tc; ctx.fillText(ts,W-8,H-8);
+
+  /* Streaming banner */
+  if(MCAM.streamMode&&MCAM.isEnabled){
+    var bw=Math.round(W*.3),bh=Math.round(H*.065);
+    ctx.fillStyle='rgba(220,38,38,.85)'; ctx.fillRect(0,H-bh,bw,bh);
+    ctx.font='bold '+Math.round(fs*.78)+'px monospace';
+    ctx.textAlign='left'; ctx.textBaseline='bottom'; ctx.fillStyle='#fff';
+    ctx.fillText('\u25B6 STREAMING LIVE',5,H-3);
+  }
+
+  /* MOTION flash */
+  if(this.motionFlash>0){
+    this.motionFlash--;
+    if(Math.floor(this.motionFlash/12)%2===0){
+      ctx.font='bold '+Math.round(fs*.8)+'px monospace';
+      ctx.textAlign='left'; ctx.textBaseline='top';
+      ctx.fillStyle='rgba(0,0,0,.7)'; ctx.fillText('\u25C9 MOTION',fs+16,fs+11+4);
+      ctx.fillStyle='#facc15'; ctx.fillText('\u25C9 MOTION',fs+15,fs+10+4);
+    }
+  }
+
+  /* Social watermark */
+  if(MCAM.social&&MCAM.isEnabled){
+    ctx.save(); ctx.globalAlpha=.2; ctx.fillStyle=nv?'#00ff55':'#fff';
+    ctx.font=Math.round(fs*.78)+'px sans-serif';
+    ctx.textAlign='left'; ctx.textBaseline='middle';
+    ctx.fillText('@ResortCam',8,H*.5);
+    ctx.restore();
+  }
+
+  ctx.restore();
+};
+
+WCR.prototype._drawWeather=function(){
+  if(!MCAM.weatherOverlay||!MCAM.isEnabled)return;
+  var ctx=this.ctx,W=this.W,H=this.H,nv=MCAM.nightVision;
+  var seed=this.idx+((Math.floor(Date.now()/300000))&0xfff);
+  var temp=-18+_pr(seed,0)*22,wind=3+_pr(seed,1)*32,snow=_pr(seed,2)*7;
+  var viE=['Excellent','Good','Fair','Poor'],viF=['Excellente','Bonne','Correcte','Mauvaise'];
+  var vi=(MCAM.lang==='fr'?viF:viE)[Math.floor(_pr(seed,3)*4)];
+  var viLbl=MCAM.lang==='fr'?'Visibilite':'Visibility';
+  var fs=Math.round(W*.024),lh=fs+4,bw=Math.round(W*.30),bh=lh*3+16,bx=8,by=H-bh-8;
+  ctx.save();
+  ctx.fillStyle=nv?'rgba(0,22,0,.84)':'rgba(0,15,45,.84)';
+  ctx.beginPath(); if(ctx.roundRect)ctx.roundRect(bx,by,bw,bh,5); else ctx.rect(bx,by,bw,bh); ctx.fill();
+  ctx.fillStyle=nv?'#00ff55':'#dff0ff'; ctx.font=fs+'px monospace';
+  ctx.textBaseline='top'; ctx.textAlign='left';
+  if(nv){ctx.shadowBlur=4;ctx.shadowColor='#00ff55';}
+  var sig=temp>=0?'+':'';
+  ctx.fillText('\uD83C\uDF21 '+sig+temp.toFixed(1)+'\u00B0C',bx+7,by+6);
+  ctx.fillText('\uD83D\uDCA8 '+wind.toFixed(0)+' km/h  \u2744 '+snow.toFixed(1)+' cm/h',bx+7,by+6+lh);
+  ctx.fillText('\uD83D\uDC41 '+viLbl+': '+vi,bx+7,by+6+lh*2);
+  ctx.restore();
+};
+
+WCR.prototype._applyNoise=function(){
+  if(MCAM.quality>=2)return;
+  if(Math.random()<.017){
+    var ctx=this.ctx,gy=Math.floor(Math.random()*this.H),gh=Math.floor(1+Math.random()*3),ox=Math.floor((Math.random()-.5)*10);
+    try{var sl=ctx.getImageData(0,gy,this.W,gh);ctx.putImageData(sl,ox,gy);}catch(e){}
+  }
+};
+
+WCR.prototype._drawOffline=function(){
+  var ctx=this.ctx,W=this.W,H=this.H;
+  ctx.fillStyle='#060606'; ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle='rgba(255,255,255,.04)'; ctx.lineWidth=1;
+  for(var x=0;x<W;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+  for(var y=0;y<H;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+  ctx.save(); ctx.globalAlpha=.15; ctx.fillStyle='#fff';
+  ctx.font=Math.round(H*.17)+'px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText('\uD83D\uDCF7',W/2,H/2-H*.07); ctx.restore();
+  ctx.font='bold '+Math.round(W*.038)+'px monospace'; ctx.fillStyle='rgba(255,255,255,.35)';
+  ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('OFFLINE',W/2,H/2+H*.1);
+  ctx.font=Math.round(W*.023)+'px monospace'; ctx.fillStyle='rgba(255,255,255,.2)';
+  ctx.fillText(camNames[this.idx],W/2,H/2+H*.21);
+  ctx.textAlign='left'; ctx.textBaseline='alphabetic';
+};
+
+/* ── Updates ── */
+WCR.prototype._updAll=function(){
+  /* wind */
+  this.windTmr++;
+  if(this.windTmr%200===0){this.windStr=Math.random()*.75;this.windDrift=(Math.random()-.5)*1.8;}
+  /* flakes */
+  var sm=MCAM.streamMode?1.35:1, wd=this.windDrift*this.windStr;
+  for(var i=0;i<this.flakes.length;i++){
+    var f=this.flakes[i];
+    f.y+=f.spd*sm; f.x+=f.drift+wd;
+    if(f.y>this.H+4){f.y=-4;f.x=Math.random()*this.W;}
+    if(f.x<-4||f.x>this.W+4)f.x=Math.random()*this.W;
+  }
+  /* skiers */
+  if(MCAM.isEnabled){
+    for(var j=0;j<this.skiers.length;j++){
+      var sk=this.skiers[j]; sk.x+=sk.vx; sk.y+=sk.vy; sk.wb+=sk.wbS;
+      if(Math.abs(sk.x-this.W*.5)<20&&Math.random()<.008)this.motionFlash=85;
+      if(sk.x<-35||sk.x>this.W+35||sk.y>this.H+20)this.skiers[j]=this._mkSk();
+    }
+  }
+  /* gondolas */
+  for(var k=0;k<this.gondolas.length;k++){this.gondolas[k].t+=this.gondolas[k].spd;if(this.gondolas[k].t>1)this.gondolas[k].t-=1;}
+  /* clouds */
+  for(var m=0;m<this.clouds.length;m++){var c=this.clouds[m];c.x-=c.spd;if(c.x+c.w<0)c.x=this.W+c.w;}
+};
+
+WCR.prototype._draw=function(){
+  if(!MCAM.isEnabled){this._drawOffline();return;}
+  this._drawBg();
+  this._drawClouds();
+  this._drawLift();
+  this._drawTrees();
+  this._drawLodge();
+  this._drawPark();
+  this._drawFog();
+  this._drawFlakes();
+  for(var i=0;i<this.skiers.length;i++)this._drawSkier(this.skiers[i]);
+  this._applyNV();
+  this._applyVig();
+  this._drawHUD();
+  this._drawWeather();
+  this._applyNoise();
+};
+
+WCR.prototype._tick=function(){
+  this.frame++; this._updAll(); this._draw();
+  this._raf=requestAnimationFrame(this._tick);
+};
+
+WCR.prototype.destroy=function(){if(this._raf)cancelAnimationFrame(this._raf);};
+WCR.prototype.pause=function(){if(this._raf){cancelAnimationFrame(this._raf);this._raf=null;}};
+WCR.prototype.resume=function(){if(!this._raf){this._tick();}};
+
+/* ── Helpers ── */
+function _fmt(d){function p(n){return String(n).padStart(2,'0');}return p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds())+'  '+p(d.getDate())+'/'+p(d.getMonth()+1)+'/'+d.getFullYear();}
+function _pr(seed,n){return(((seed*1664525+n*1013904223)>>>0)&0x7fffffff)/0x7fffffff;}
+
+/* ════ Boot grid renderers ════ */
+var gridR=[];
+for(var i=0;i<MCAM.numCams;i++){var cv=document.getElementById('mcam-canvas-'+i);if(cv)gridR.push(new WCR(cv,i));}
+
+/* Hover effect */
+document.querySelectorAll('.mcam-cell').forEach(function(cell){
+  cell.addEventListener('mouseenter',function(){var h=cell.querySelector('.mcam-hov');if(h){h.style.background='rgba(0,0,0,0.32)';h.querySelector('span').style.opacity='1';}});
+  cell.addEventListener('mouseleave',function(){var h=cell.querySelector('.mcam-hov');if(h){h.style.background='rgba(0,0,0,0)';h.querySelector('span').style.opacity='0';}});
+});
+
+/* ════ Modal ════ */
+var modal=document.getElementById('mcam-modal');
+var mInner=document.getElementById('mcam-modal-inner');
+var mCanvas=document.getElementById('mcam-modal-canvas');
+var mLabel=document.getElementById('mcam-modal-label');
+var mR=null, mIdx=0;
+
+function _openModal(idx){
+  if(mR){mR.destroy();mR=null;}
+  mIdx=idx;
+  /* pause grid to save resources */
+  for(var i=0;i<gridR.length;i++)gridR[i].pause();
+  /* show with fade */
+  modal.style.display='flex';
+  /* force reflow before setting opacity so transition fires */
+  modal.offsetHeight;
+  modal.style.opacity='1';
+  document.body.style.overflow='hidden';
+  mR=new WCR(mCanvas,idx);
+  var stateTxt=MCAM.isEnabled?(MCAM.streamMode?'  \u25B6 LIVE STREAM':'  \u25CF RECORDING'):'  \u25CF OFFLINE';
+  mLabel.textContent=camNames[idx%camNames.length]+stateTxt;
+  document.getElementById('mcam-prev').style.opacity=idx>0?'1':'0.25';
+  document.getElementById('mcam-prev').style.pointerEvents=idx>0?'auto':'none';
+  document.getElementById('mcam-next').style.opacity=idx<MCAM.numCams-1?'1':'0.25';
+  document.getElementById('mcam-next').style.pointerEvents=idx<MCAM.numCams-1?'auto':'none';
+}
+
+function _closeModal(){
+  modal.style.opacity='0';
+  setTimeout(function(){
+    modal.style.display='none';
+    document.body.style.overflow='';
+    if(mR){mR.destroy();mR=null;}
+    /* resume grid */
+    for(var i=0;i<gridR.length;i++)gridR[i].resume();
+  },220);
+}
+
+/* Event wiring — no inline onclick */
+modal.addEventListener('click',function(e){if(e.target===modal)_closeModal();});
+mInner.addEventListener('click',function(e){e.stopPropagation();});
+document.getElementById('mcam-close').addEventListener('click',_closeModal);
+document.getElementById('mcam-prev').addEventListener('click',function(e){e.stopPropagation();if(mIdx>0)_openModal(mIdx-1);});
+document.getElementById('mcam-next').addEventListener('click',function(e){e.stopPropagation();if(mIdx<MCAM.numCams-1)_openModal(mIdx+1);});
+
+document.querySelectorAll('.mcam-cell').forEach(function(cell){
+  cell.addEventListener('click',function(){_openModal(parseInt(cell.dataset.camIndex,10));});
+});
+
+document.addEventListener('keydown',function(e){
+  if(modal.style.display!=='flex')return;
+  if(e.key==='Escape'){_closeModal();}
+  if(e.key==='ArrowLeft'&&mIdx>0)_openModal(mIdx-1);
+  if(e.key==='ArrowRight'&&mIdx<MCAM.numCams-1)_openModal(mIdx+1);
+});
+
+}());
+</script>
+
+</div>

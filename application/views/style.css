@@ -1,0 +1,154 @@
+/* style.css - Even More Improved UX/UI */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.7; /* Slightly increased line height */
+    background-color: #f9f9f9; /* Very subtle off-white background */
+    color: #343a40; /* Slightly darker text color */
+    margin: 0;
+    font-size: 16px; /* Base font size */
+}
+
+.container-fluid {
+    max-width: 1100px; /* Slightly more narrow container */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.container-border {
+    border: none;
+    border-radius: 16px; /* More pronounced rounded corners */
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Softer and larger shadow */
+    overflow: hidden;
+    margin-bottom: 40px; /* Increased margin bottom */
+}
+
+.padding_top_bot_15 {
+    padding: 40px 20px; /* Increased padding */
+}
+
+.padding15-no-top {
+    padding: 0 20px 40px; /* Increased padding */
+}
+
+.center {
+    text-align: center;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h2 {
+    font-size: 2.8rem; /* Larger heading */
+    color: #28a745;
+    margin-bottom: 25px; /* Increased margin bottom */
+    font-weight: 600;
+}
+
+h3 {
+    color: #343a40;
+    margin-bottom: 20px; /* Increased margin bottom */
+    font-weight: 500;
+}
+
+p {
+    margin-bottom: 1.2rem; /* Slightly increased margin bottom */
+}
+
+.outer_news_block {
+    border: none;
+    padding: 25px; /* Increased padding */
+    border-radius: 10px; /* Slightly more rounded corners */
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* Slightly more rounded corners */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 25px; /* Increased margin bottom */
+}
+
+/* Changelog Styles - Improved */
+.changelog-container {
+    padding-top: 50px; /* Increased padding top */
+    margin-top: 60px; /* Increased margin top */
+}
+
+.changelog-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px; /* Increased gap */
+}
+
+.changelog-list > li {
+    border: 1px solid #eee;
+    border-radius: 10px; /* Slightly more rounded corners */
+    padding: 25px; /* Increased padding */
+    flex: 1 0 320px; /* Slightly wider base */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.changelog-list h4 {
+    color: #28a745;
+    margin-bottom: 12px; /* Increased margin bottom */
+    font-weight: 600;
+    font-size: 1.3rem; /* Slightly larger font size */
+}
+
+.changelog-list ul {
+    list-style: disc;
+    margin-left: 30px;
+    padding: 0;
+}
+
+.changelog-list li li {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Social Icon Styles */
+.social-icon {
+    width: 52px; /* Slightly larger icons */
+    height: 52px; /* Slightly larger icons */
+    margin: 0 18px; /* Increased margin */
+    transition: transform 0.2s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.15);
+    opacity: 0.85; /* Slightly more opacity reduction on hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 0 15px;
+    }
+
+    .padding_top_bot_15, .padding15-no-top {
+        padding: 30px 15px; /* Slightly reduced padding */
+    }
+
+    h2 {
+        font-size: 2.2rem; /* Slightly smaller heading */
+    }
+
+    .social-icon {
+        width: 44px; /* Slightly smaller icons */
+        height: 44px; /* Slightly smaller icons */
+        margin: 0 12px; /* Reduced margin */
+    }
+
+    .changelog-list > li {
+        flex-basis: 100%; /* Stack changelog items on small screens */
+    }
+}

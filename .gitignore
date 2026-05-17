@@ -1,0 +1,7 @@
+vendor
+.env
+.env.*
+*.log
+logs
+cache
+session

@@ -1,0 +1,179 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+/* Container Styling */
+.container-fluid {
+    max-width: 800px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Input Fields */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover,
+input[type="number"]:hover {
+    border-color: #17a2b8;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus {
+    outline: 3px solid #0056b3;
+    outline-offset: 2px;
+    border-color: #17a2b8;
+    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25);
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Error Message Styling */
+.error {
+    color: #9b0000;
+    font-size: 14px;
+}
+
+/* Success Message */
+.success {
+    color: #14521f;
+    font-size: 14px;
+}
+
+/* Container Border */
+.container-border {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container-fluid {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .container-border {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .col-md-4 {
+        width: 40%;
+    }
+    .col-md-8 {
+        width: 55%;
+    }
+}
+
+/* ── Dark mode overrides ─────────────────────────────────────────────────── */
+
+[data-theme="dark"] body {
+    background-color: #1a1d23;
+    color: #e8eaf0;
+}
+
+[data-theme="dark"] .container-fluid {
+    background: #252932;
+    color: #e8eaf0;
+}
+
+[data-theme="dark"] .container-border {
+    background-color: #252932;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="email"],
+[data-theme="dark"] input[type="password"],
+[data-theme="dark"] input[type="number"] {
+    background-color: #2e3340;
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #e8eaf0;
+}
+
+[data-theme="dark"] input[type="text"]:hover,
+[data-theme="dark"] input[type="email"]:hover,
+[data-theme="dark"] input[type="password"]:hover,
+[data-theme="dark"] input[type="number"]:hover {
+    border-color: #17a2b8;
+}
+
+[data-theme="dark"] input[type="text"]:focus,
+[data-theme="dark"] input[type="email"]:focus,
+[data-theme="dark"] input[type="password"]:focus,
+[data-theme="dark"] input[type="number"]:focus {
+    background-color: #2e3340;
+    border-color: #17a2b8;
+    color: #e8eaf0;
+    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25);
+}
+
+[data-theme="dark"] .error {
+    color: #d9a3a3;
+}
+
+[data-theme="dark"] .success {
+    color: #a3d9b1;
+}
