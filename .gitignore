@@ -1,5 +1,3 @@
-# .gitignore
-
 # Dependencies
 node_modules/
 vendor/
@@ -27,16 +25,19 @@ pids/
 dist/
 build/
 public/build/
-coverage/
 
 # Cache
 .cache/
 .tmp/
 .temp/
 
-# IDE
+# IDE / Editor
 .vscode/
 .idea/
+*.swp
+*.swo
+
+# OS-specific
 
 # macOS
 .DS_Store
@@ -56,16 +57,16 @@ volumes/
 *.sqlite
 *.db
 
-# SSL
+# SSL / Certificates
 *.pem
 *.key
 *.crt
 
-# Uploads
+# Uploads / Storage
 uploads/
 storage/
 
-# Generated files
+# Archives / Generated bundles
 *.zip
 *.tar
 *.gz
@@ -73,7 +74,3 @@ storage/
 # Testing
 coverage/
 .nyc_output/
-
-# Misc
-*.swp
-*.swo
