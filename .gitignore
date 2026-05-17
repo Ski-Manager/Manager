@@ -1,7 +1,79 @@
-vendor
-.env
-.env.*
+# .gitignore
+
+# Dependencies
+node_modules/
+vendor/
+
+# Logs
+logs/
 *.log
-logs
-cache
-session
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.development
+
+# Build output
+dist/
+build/
+public/build/
+coverage/
+
+# Cache
+.cache/
+.tmp/
+.temp/
+
+# IDE
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Docker
+docker-data/
+volumes/
+
+# Database
+*.sqlite
+*.db
+
+# SSL
+*.pem
+*.key
+*.crt
+
+# Uploads
+uploads/
+storage/
+
+# Generated files
+*.zip
+*.tar
+*.gz
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+*.swp
+*.swo
