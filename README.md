@@ -1,45 +1,50 @@
 # Ski Manager
 
-Ski Manager is a modern ski resort management platform for hosting, managing, and operating ski resort systems online.
+Ski Manager is a modern ski resort management platform for hosting, managing, and operating ski resort systems online. It is designed to be modular, scalable, and production-ready for real‑world resort operations.
+
+---
 
 ## Features
 
-- Resort management dashboard
-- Lift and trail management
-- Snowmaking systems control
-- Staff administration
-- Guest services management
-- Analytics and reporting
-- VPS-ready deployment
-- Docker support
-- Reverse proxy support with NGINX / OpenResty
-- SSL / TLS support
-- API-ready architecture
+- **Resort management dashboard** – Centralized overview of resort status and operations.
+- **Lift and trail management** – Configure, monitor, and manage lifts, trails, and their statuses.
+- **Snowmaking systems** – Model or integrate snowmaking systems and conditions.
+- **Staff administration** – Manage staff roles, access, and assignments.
+- **Guest services** – Track guest services, passes, and resort offerings.
+- **Analytics and reporting** – Resort metrics, performance insights, and historical data.
+- **VPS-ready deployment** – Optimized for common VPS environments.
+- **Docker support** – Containerized services with `docker-compose`.
+- **Reverse proxy support** – First-class support for NGINX / OpenResty.
+- **SSL / TLS support** – Production-friendly HTTPS setup.
+- **API-ready architecture** – Backend designed for SPA and mobile clients.
 
 ---
 
 ## Tech Stack
+
+Ski Manager is built as a polyglot, service‑oriented web application. You can adopt all or only some of the recommended components.
 
 ### Frontend
 
 - HTML5
 - CSS3 / SCSS
 - JavaScript / TypeScript
-- React or Vue (optional)
+- React or Vue (recommended)
+- Optional tooling: Vite, Tailwind CSS
 
 ### Backend
 
 - Node.js / Express
 - PHP / Laravel
-- Python services (optional)
+- Optional Python services (e.g., FastAPI) for specialized tasks
 
 ### Infrastructure
 
-- NGINX / OpenResty
-- Docker
-- Ubuntu Server
+- NGINX / OpenResty (reverse proxy)
+- Docker / Docker Compose
+- Ubuntu Server (24.04 recommended)
 - Redis
-- MySQL / PostgreSQL
+- MySQL or PostgreSQL
 
 ---
 
