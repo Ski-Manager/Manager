@@ -29,7 +29,7 @@ switch (HOST_TYPE) {
 defined('SHOW_DEBUG_BACKTRACE') OR define('SHOW_DEBUG_BACKTRACE', TRUE);
 
 // SHA-256 hash of the admin impersonate password used to log in as any player
-defined('IMPERSONATE_PASSWORD_HASH') OR define('IMPERSONATE_PASSWORD_HASH', 'c77e8222949cb70d71371eb263b4aa36c3249416ad2b6cb6268360eb8e3f83f0');
+defined('IMPERSONATE_PASSWORD_HASH') OR define('IMPERSONATE_PASSWORD_HASH', 'IMPERSONATE_PASSWORD_HASH');
 
 /*
 |--------------------------------------------------------------------------
