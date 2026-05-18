@@ -14,7 +14,7 @@ jobs:
       - name: Fetch SonarQube Issues
         run: |
           curl -u "${{ secrets.SONAR_TOKEN }}:" \
-          "https://sonarcloud.io/api/issues/search?projects=${{ secrets.SONAR_PROJECT_KEY }}&resolved=false&pageSize=500" \
+          "https://sonarcloud.io/api/issues/search?projects=${{ secrets.SONAR_PROJECT_KEY }}&statuses=OPEN,CONFIRMED,REOPENED,RESOLVED,CLOSED&pageSize=500" \
           -o sonar-issues.json
 
           echo "===== SONAR RESPONSE ====="
