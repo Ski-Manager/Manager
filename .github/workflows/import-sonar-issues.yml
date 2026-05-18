@@ -48,21 +48,14 @@ jobs:
                 continue;
               }
 
-              const body = `
-Severity: ${issue.severity}
-
-Type: ${issue.type}
-
-Rule: ${issue.rule}
-
-File: ${issue.component}
-
-Line: ${issue.line || 'N/A'}
-
-Created: ${issue.creationDate}
-
-Imported from SonarQube before account deletion.
-              `;
+              const body =
+                `Severity: ${issue.severity}\n\n` +
+                `Type: ${issue.type}\n\n` +
+                `Rule: ${issue.rule}\n\n` +
+                `File: ${issue.component}\n\n` +
+                `Line: ${issue.line || 'N/A'}\n\n` +
+                `Created: ${issue.creationDate}\n\n` +
+                `Imported from SonarQube before account deletion.`;
 
               await github.rest.issues.create({
                 owner: context.repo.owner,
