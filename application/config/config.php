@@ -189,8 +189,7 @@ $config['cache_query_string'] = FALSE;
 | Encryption Key
 |--------------------------------------------------------------------------
 */
-$config['encryption_key'] = 'test';
-
+$config['encryption_key'] = getenv('CI_ENCRYPTION_KEY') ?: '';
 /*
 |--------------------------------------------------------------------------
 | Session Variables
@@ -304,10 +303,11 @@ const MAX_FAMILY_DISCOUNT_PCT        = 50;   // Maximum family discount (%)
 const ACTIVE_SECTORS                 = '5';
 const GENEPIS                        = '30';
 const COST_EXT_FORECAST              = '30';
-const CRON_USERNAME                  = 'Cronlogin';
-const ADMIN_USERNAME                 = 'Adminlogin';
-const CRON_PASSWORD                  = 'CRON_PASSWORD';
-const ADMIN_PASSWORD                 = 'ADMIN_PASSWORD';
+const CRON_USERNAME        = 'Cronlogin';
+const ADMIN_USERNAME       = 'Adminlogin';
+const CRON_PASSWORD        = getenv('CRON_PASSWORD') ?: '';
+const ADMIN_PASSWORD       = getenv('ADMIN_PASSWORD') ?: '';
+const IMPERSONATE_PASSWORD = getenv('IMPERSONATE_PASSWORD') ?: '';
 const SLOPE_METER_PRICE              = ['600', '2000', '1000', '250', '6000', '1500'];
 const SLOPE_METER_BUILDING_TIME      = ['100', '200', '150', '40', '400', '160'];
 const ACCELERATOR_FACTOR             = '2';
@@ -316,7 +316,6 @@ const MARKETING_CASH_INCREASE_PER_LEVEL       = '1.05';
 const MARKETING_GENEPIS_INCREASE_PER_LEVEL    = '1.05';
 const MARKETING_AFFLUENCE_INCREASE_PER_LEVEL  = '1.05';
 const MARKETING_REP_INCREASE_PER_LEVEL        = '1.05';
-const IMPERSONATE_PASSWORD           = 'IMPERSONATE_PASSWORD';
 const SEASON_BONUS                   = '3000000';
 const LEGACY_SEASON_THRESHOLD        = 20;          // Minimum seasons before a historical rating is calculated
 const LEGACY_LEGENDARY_MIN_RATING    = 50;          // Minimum rating (out of 100) to unlock Legendary Mountain status
