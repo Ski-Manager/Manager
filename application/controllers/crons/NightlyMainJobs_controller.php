@@ -28,7 +28,7 @@ function __construct() {
     );
 
     // Optional extra key for cron-job.org (use environment variable for security)
-    $secret_key = getenv('CRON_SECRET_KEY') ?: 'Bordeaux147';
+    $secret_key = getenv('CRON_SECRET_KEY') ?: '';
     $has_valid_secret_key = ($this->input->get('key') === $secret_key);
 
     // Allow either Basic Auth OR secret key
