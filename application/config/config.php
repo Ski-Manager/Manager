@@ -275,10 +275,10 @@ $config['proxy_ips'] = '';
 |--------------------------------------------------------------------------
 */
 const CONST_ADMIN_EMAIL    = 'contact@ski-manager.net';
-const CONST_TRACKING_EMAIL = 'tracking@ski-manager.net';
-const CONST_NOREPLY_EMAIL  = 'no-reply@ski-manager.net';
+const CONST_TRACKING_EMAIL = 'contact@ski-manager.net';
+const CONST_NOREPLY_EMAIL  = 'contact@ski-manager.net';
 
-date_default_timezone_set("Europe/Paris");
+date_default_timezone_set("America/Detroit");
 
 /*
 |--------------------------------------------------------------------------
@@ -306,8 +306,8 @@ const GENEPIS                        = '30';
 const COST_EXT_FORECAST              = '30';
 const CRON_USERNAME                  = 'Cronlogin';
 const ADMIN_USERNAME                 = 'Adminlogin';
-const CRON_PASSWORD                  = 'LUrA9iD_RqRC';
-const ADMIN_PASSWORD                 = 'w1IEPKSpt_gN';
+const CRON_PASSWORD                  = 'CRON_PASSWORD';
+const ADMIN_PASSWORD                 = 'ADMIN_PASSWORD';
 const SLOPE_METER_PRICE              = ['600', '2000', '1000', '250', '6000', '1500'];
 const SLOPE_METER_BUILDING_TIME      = ['100', '200', '150', '40', '400', '160'];
 const ACCELERATOR_FACTOR             = '2';
@@ -316,7 +316,7 @@ const MARKETING_CASH_INCREASE_PER_LEVEL       = '1.05';
 const MARKETING_GENEPIS_INCREASE_PER_LEVEL    = '1.05';
 const MARKETING_AFFLUENCE_INCREASE_PER_LEVEL  = '1.05';
 const MARKETING_REP_INCREASE_PER_LEVEL        = '1.05';
-const IMPERSONATE_PASSWORD           = 'aHOH3vqc8qsxkoG_ZyPt';
+const IMPERSONATE_PASSWORD           = 'IMPERSONATE_PASSWORD';
 const SEASON_BONUS                   = '3000000';
 const LEGACY_SEASON_THRESHOLD        = 20;          // Minimum seasons before a historical rating is calculated
 const LEGACY_LEGENDARY_MIN_RATING    = 50;          // Minimum rating (out of 100) to unlock Legendary Mountain status
@@ -1212,7 +1212,7 @@ const MASTER_PLAN_VALID_STATUSES         = ['draft', 'submitted', 'approved', 'a
 // ---------------------------------------------------------------------------
 // Ski Resort Quiz – secret access code
 // ---------------------------------------------------------------------------
-const SKI_QUIZ_SECRET_CODE = 'SKIQUIZ2025'; // Secret code required to access the ski resort quiz
+const SKI_QUIZ_SECRET_CODE = 'SKI_QUIZ_SECRET_CODE'; // Secret code required to access the ski resort quiz
 
 // Crisis events configuration
 const CRISIS_EVENT_PROBABILITY         = 5;    // Percentage chance (1-100) that a crisis event occurs each night per resort
@@ -1714,7 +1714,7 @@ const GROOMER_INTENSITY_INTENSIVE = 1.5;
 */
 $config['closed_mode']       = false;
 $config['maintenance_mode']  = false;
-$config['maintenance_ips']   = ['151.177.43.129', '127.0.0.1'];
+$config['maintenance_ips']   = ['127.0.0.1'];
 
 /*
 |--------------------------------------------------------------------------
@@ -1853,6 +1853,6 @@ const GOV_SUBSIDY_AMOUNT                = 10000;// € subsidy when eco_rep qual
 | Home Page – Image Upload & hCaptcha
 |--------------------------------------------------------------------------
 */
-$config['home_upload_token']   = '8f3d9b2a4c6e7f0182a9c3d4b5e6f7a89c2d1e0f3b4a5c6d';
-$config['hcaptcha_secret']     = 'ES_9841e4331925492ba2a6847bae6b79df';
-$config['hcaptcha_sitekey']    = '1e9823fa-34e6-4c86-9636-a4fa248c590a';
+$config['home_upload_token']   = 'HOME_UPLOAD_TOKEN';
+$config['hcaptcha_secret']     = 'HCAPTCHA_SECRET';
+$config['hcaptcha_sitekey']    = 'HCAPTCHA_SITEKEY';
