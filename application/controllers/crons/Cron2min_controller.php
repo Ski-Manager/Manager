@@ -28,7 +28,7 @@ class Cron2min_Controller extends CI_Controller {
         parent::__construct();
 
         // Secret key for cron authentication
-        $secret_key = 'Bordeaux147';
+        $secret_key = getenv('CRON_SECRET_KEY') ?: '';
         $provided_key = $_GET['key'] ?? null;
 
         if ($provided_key !== $secret_key) {
