@@ -5,7 +5,7 @@ class CronSpecialEvents_controller extends CI_Controller {
         parent::__construct();
 
         // SIMPLE CRON SECURITY (works with cron-job.org)
-        $secret_key = 'Bordeaux147';
+        $secret_key = getenv('CRON_SECRET_KEY') ?: '';
 
         if ($this->input->get('key') !== $secret_key) {
             header('HTTP/1.0 401 Unauthorized');
