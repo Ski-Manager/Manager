@@ -81,7 +81,7 @@ function get_pdo(): PDO
         return $pdo;
     }
     $host   = getenv('DB_HOST')     ?: 'localhost';
-    $dbname = getenv('DB_NAME')     ?: 'u853012228_skiman';
+    $dbname = getenv('DB_NAME');
     $user   = getenv('DB_USER')     ?: '';
     $pass   = getenv('DB_PASS')     ?: '';
     $port   = (int) (getenv('DB_PORT') ?: 3306);
