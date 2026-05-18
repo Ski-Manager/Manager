@@ -14,39 +14,34 @@ jobs:
       - name: Fetch SonarQube Issues
         run: |
           curl -u "${{ secrets.SONAR_TOKEN }}:" \
-          "${{ secrets.SONAR_HOST_URL }}/api/issues/search?projects=${{ secrets.SONAR_PROJECT_KEY }}&resolved=false&pageSize=500" \
+          "https://sonarcloud.io/api/issues/search?projects=${{ secrets.SONAR_PROJECT_KEY }}&resolved=false&pageSize=500" \
           -o sonar-issues.json
 
+          echo "===== SONAR RESPONSE ====="
+          cat sonar-issues.json
+
       - name: Create GitHub Issues
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const fs = require('fs');
 
-            const data = JSON.parse(
-              fs.readFileSync('sonar-issues.json', 'utf8')
-            );
+            const raw = fs.readFileSync('sonar-issues.json', 'utf8');
 
-            const existingIssues =
-              await github.rest.issues.listForRepo({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                state: 'all',
-                per_page: 100
-              });
+            console.log(raw);
+
+            const data = JSON.parse(raw);
+
+            if (!data.issues) {
+              core.setFailed('SonarCloud API returned no issues field');
+              return;
+            }
+
+            console.log(`Found ${data.issues.length} issues`);
 
             for (const issue of data.issues) {
               const title = `[SonarQube] ${issue.message}`;
-
-              const exists = existingIssues.data.some(
-                i => i.title === title
-              );
-
-              if (exists) {
-                console.log(`Skipping existing issue: ${title}`);
-                continue;
-              }
 
               const body =
                 `Severity: ${issue.severity}\n\n` +
@@ -54,8 +49,7 @@ jobs:
                 `Rule: ${issue.rule}\n\n` +
                 `File: ${issue.component}\n\n` +
                 `Line: ${issue.line || 'N/A'}\n\n` +
-                `Created: ${issue.creationDate}\n\n` +
-                `Imported from SonarQube before account deletion.`;
+                `Created: ${issue.creationDate}`;
 
               await github.rest.issues.create({
                 owner: context.repo.owner,
@@ -65,5 +59,5 @@ jobs:
                 labels: ['sonarqube-import']
               });
 
-              console.log(`Created issue: ${title}`);
+              console.log(`Created: ${title}`);
             }
