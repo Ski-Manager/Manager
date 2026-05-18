@@ -71,7 +71,7 @@ class Admin_maintenance_model extends CI_Model{
     public function select_all_tables(){
         $this->db->select('table_type, table_name, table_rows');
         $this->db->from('information_schema.tables');
-        $this->db->where('TABLE_SCHEMA', 'u853012228_skiman');
+        $this->db->where('TABLE_SCHEMA', getenv('DB_NAME'));
         $query = $this->db->get();
         return $query;
     }
