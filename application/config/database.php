@@ -74,9 +74,9 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $_db_host = getenv('DB_HOST') ?: 'mysql';
-$_db_user = getenv('DB_USER') ?: 'main';
-$_db_pass = getenv('DB_PASS') ?: 'Bordeaux147';
-$_db_name = getenv('DB_NAME') ?: 'u853012228skiman';
+$_db_user = getenv('DB_USER') ?: 'DB_USER';
+$_db_pass = getenv('DB_PASS') ?: 'DB_PASS';
+$_db_name = getenv('DB_NAME') ?: 'DB_NAME';
 
 $db['default'] = array(
 	'dsn'	=> '',
