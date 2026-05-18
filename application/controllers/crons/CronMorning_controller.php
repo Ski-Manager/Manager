@@ -5,7 +5,7 @@ class CronMorning_Controller extends CI_Controller {
         parent::__construct();
 
         // Authentication: accept either HTTP Basic Auth or ?key=Bordeaux147 (for cron-job.org)
-        $secret_key = 'Bordeaux147';
+        $secret_key = getenv('CRON_SECRET_KEY') ?: '';
         $has_valid_secret_key = ($this->input->get('key') === $secret_key);
 
         if (!$has_valid_secret_key) {
