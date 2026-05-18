@@ -29,7 +29,15 @@ switch (HOST_TYPE) {
 defined('SHOW_DEBUG_BACKTRACE') OR define('SHOW_DEBUG_BACKTRACE', TRUE);
 
 // SHA-256 hash of the admin impersonate password used to log in as any player
-defined('IMPERSONATE_PASSWORD_HASH') OR define('IMPERSONATE_PASSWORD_HASH', 'IMPERSONATE_PASSWORD_HASH');
+// application/config/constants.php
+
+$impersonatePassword = getenv('IMPERSONATE_PASSWORD') ?: '';
+
+defined('IMPERSONATE_PASSWORD_HASH') OR define(
+    'IMPERSONATE_PASSWORD_HASH',
+    hash('sha256', $impersonatePassword)
+);
+
 
 /*
 |--------------------------------------------------------------------------
