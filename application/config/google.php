@@ -17,7 +17,7 @@
 |  the browser console message "The given origin is not allowed for the
 |  given client ID."
 */
-$config['google_client_id'] = '661843131336-v559t5tq8kkj5nraan2v8s4vemtednfo.apps.googleusercontent.com';
+$config['google_client_id'] = 'GOOGLE_CLIENT_ID';
 
 // Disable the Google Sign-In button on localhost to prevent the 400 error
 // caused by the origin not being registered in the Google Cloud Console.
