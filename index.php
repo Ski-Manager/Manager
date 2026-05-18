@@ -63,7 +63,7 @@ if ($host_bare === 'localhost' || $host_bare === '127.0.0.1') {
 // --------------------------------------------------------------------
 // ENVIRONMENT SETUP
 // --------------------------------------------------------------------
-define('ENVIRONMENT', $_SERVER['CI_ENV'] ?? 'production');
+define('ENVIRONMENT', 'development');
 
 switch (ENVIRONMENT) {
     case 'development':
