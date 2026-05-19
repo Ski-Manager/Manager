@@ -88,7 +88,7 @@ switch (ENVIRONMENT) {
 // FLARE ERROR MONITORING
 // --------------------------------------------------------------------
 if (class_exists(\Spatie\FlareClient\Flare::class)) {
-    $flareConfig = \Spatie\FlareClient\FlareConfig::make('Hfbf4pwCRipt0RAdJMEr9kIIb1htnjbh')->useDefaults()->trace();
+    $flareConfig = \Spatie\FlareClient\FlareConfig::make('FLARE_API')->useDefaults()->trace();
     \Spatie\FlareClient\Flare::make($flareConfig)->registerFlareHandlers();
 }
 
@@ -100,7 +100,7 @@ $maintenance = false; // enable/disable maintenance mode
 if ($maintenance) {
 
 // secret token for bypass - should be moved to environment variable for production
-$bypass_token = getenv('MAINTENANCE_BYPASS_TOKEN') ?: 'e4a1b6c3d9f7a2b8c5d1e3f4b6a7c8d9';
+$bypass_token = getenv('MAINTENANCE_BYPASS_TOKEN') ?: '';
 
 // bypass cookie
 $bypass_cookie_name = 'maintenance_bypass';
