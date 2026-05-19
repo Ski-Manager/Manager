@@ -218,7 +218,7 @@ $lang['home']['euros']	= '€';
 $lang['home']['rush']	= 'Rush';
 $lang['home']['speed_up_for_genepis']	= 'You can speed up the time by spending a few Génépis. The construction/purchase will be completed instantly.';
 $lang['home']['not_enough_genepis']	= 'Not enough Génépis to rush';
-$lang['home']['not_enough_genepis_to_rush']	= 'You don\'t have enough Génépis to rush this. Go to the Génépis page to buy some more.';
+$lang['home']['not_enough_genepis_to_rush']	= 'You don\'t have enough Génépis to rush this. You can earn more through referrals, achievements, and in-game rewards.';
 $lang['home']['you_have_rushed']	= 'You have rushed';
 
 
@@ -288,7 +288,7 @@ $lang['home']['faq_eyebrow']             = 'Need a quick answer?';
 $lang['home']['faq_intro']               = 'Find the essentials about accounts, gameplay and how to get your first resort running.';
 $lang['home']['faq_stat_label']          = 'quick answers';
 $lang['home']['faq_q1']                  = 'Is Ski-Manager really free to play?';
-$lang['home']['faq_a1']                  = 'Yes, completely! Ski-Manager is 100% free to play with no mandatory purchases. Optional premium currency (Génépis) can be used to speed up certain actions, but the full game is accessible to everyone at no cost.';
+$lang['home']['faq_a1']                  = 'Yes, completely! Ski-Manager is 100% free to play. Génépis can be earned in game and used to speed up certain actions, but the full game is accessible to everyone at no cost.';
 $lang['home']['faq_q2']                  = 'Do I need to download or install anything?';
 $lang['home']['faq_a2']                  = 'No download or installation is required. Ski-Manager runs entirely in your web browser on any device – desktop, tablet or mobile – so you can play whenever and wherever you like.';
 $lang['home']['faq_q3']                  = 'How do I start playing?';

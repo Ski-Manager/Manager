@@ -13,10 +13,6 @@ class Genepis_controller extends CI_Controller{
         parent::__construct(); 
         $ci =& get_instance();
         
-        // Load paypal library & product model
-        $this->load->library('paypal_lib');
-        $this->load->model('product');
-        
         if ($ci->session->userdata('site_lang')) {
             $siteLang = $ci->session->userdata('site_lang');            // Store current language in variable
         } else {
@@ -35,8 +31,6 @@ class Genepis_controller extends CI_Controller{
             redirect('home_controller');                                 // If not logged in, redirect to homepage
         $this->load->model('users_model');
         $this->load->model('genepis_model');
-        $this->load->model('Product');
-        
     }
     
 
@@ -53,37 +47,14 @@ class Genepis_controller extends CI_Controller{
         $data['class'] = $class;
         $player_preferred_lang = $this->users_model->get_user_preferred_lang($currentUserID);
         $data['comment_language'] = 'comment_'.$player_preferred_lang;
-        // Get products data from the database
-        $data['products'] = $this->product->getRows();
               
         // Displaying the account view
         $data['main_content'] = 'genepis';
         $this->load->view('templates/default',$data);  
     }
    
-    function buy($id){
-        // Set variables for paypal form
-        $returnURL = base_url().'paypal/success';
-        $cancelURL = base_url().'paypal/cancel';
-        $notifyURL = base_url().'paypal/ipn';
-        
-        // Get product data from the database
-        $product = $this->product->getRows($id);
-        
-        // Get current user ID from the session
-        $userID = $this->users_model->get_user_id();  // to be used in the view
-        //
-        // Add fields to paypal form
-        $this->paypal_lib->add_field('return', $returnURL);
-        $this->paypal_lib->add_field('cancel_return', $cancelURL);
-        $this->paypal_lib->add_field('notify_url', $notifyURL);
-        $this->paypal_lib->add_field('item_name', $product['name']);
-        $this->paypal_lib->add_field('custom', $userID);
-        $this->paypal_lib->add_field('item_number',  $product['id']);
-        $this->paypal_lib->add_field('amount',  $product['price']);
-        
-        // Render paypal form
-        $this->paypal_lib->paypal_auto_form();
+    function buy($id = NULL){
+        show_404();
     }
     
     protected function get_referral_link($currentUserID) {

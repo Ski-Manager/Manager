@@ -374,7 +374,7 @@ $introImage = '<picture>'
     <div class="home-faq-section mt-5">
       <?php
         $faqs = [
-            ['q'=>$CI->lang->line('home')['faq_q1'] ?? 'Is Ski-Manager free to play?',               'a'=>$CI->lang->line('home')['faq_a1'] ?? 'Yes, Ski-Manager is 100% free to play with no mandatory purchases.'],
+            ['q'=>$CI->lang->line('home')['faq_q1'] ?? 'Is Ski-Manager free to play?',               'a'=>$CI->lang->line('home')['faq_a1'] ?? 'Yes, Ski-Manager is 100% free to play.'],
             ['q'=>$CI->lang->line('home')['faq_q2'] ?? 'Do I need to download anything?',             'a'=>$CI->lang->line('home')['faq_a2'] ?? 'No download or installation required. Ski-Manager runs in any web browser.'],
             ['q'=>$CI->lang->line('home')['faq_q3'] ?? 'How do I start playing?',                     'a'=>$CI->lang->line('home')['faq_a3'] ?? 'Create a free account and follow the in-game tutorial.'],
             ['q'=>$CI->lang->line('home')['faq_q4'] ?? 'Can I play in multiple languages?',           'a'=>$CI->lang->line('home')['faq_a4'] ?? 'Yes! Ski-Manager is available in English and French.'],

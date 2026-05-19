@@ -114,7 +114,6 @@ Controllers are organized by domain. Each controller handles one game system:
 
 **Finance & Business**
 - `Bank_controller`, `Finances_controller`, `Insurance_controller`
-- `Paypal` — payment processing
 - `Marketing_controller`, `Marketing_upgrade_controller`
 - `Sponsorship_controller`
 - `Real_estate_controller`, `Town_controller`
@@ -199,7 +198,6 @@ Standalone PHP scripts outside the CodeIgniter MVC stack, serving JSON to extern
 | Email / password | Custom CI3 auth (`Login_controller`, `User_authentication`) |
 | Google OAuth | `Login_controller/googleCallback` |
 | CrazyGames SDK | `Crazygames_controller/verify_token` |
-| PayPal | `Paypal` controller + PayPal SDK config |
 
 Session tokens stored in the database session table. Whitelisted IPs for maintenance bypass stored in `config.php` under `maintenance_ips`.
 
@@ -218,7 +216,6 @@ Session tokens stored in the database session table. Whitelisted IPs for mainten
 | `application/config/email.php` | SMTP / email settings |
 | `application/config/google.php` | Google OAuth credentials |
 | `application/config/facebook.php` | Facebook credentials |
-| `application/config/paypal.php` | PayPal API credentials |
 | `application/config/memcached.php` | Cache server settings |
 
 ---

@@ -16,7 +16,6 @@ $lang['genepis']['get_genepis_1']			= 'When creating your account you automatica
 $lang['genepis']['get_genepis_2']			= 'When inviting friends to the game, you will also be credited '.GENEPIS.' Génépis after they have completed a few achievements.';
 $lang['genepis']['get_genepis_3']			= 'By clicking on the announces below to earn free Génépis.';
 $lang['genepis']['get_genepis_4']			= 'By using one of the SMS or phone service below.';
-$lang['genepis']['get_genepis_5']			= 'By buying them with the sacured payment service Paypal available at the bottom of the page.';
 
 
 $lang['genepis']['current_balance']			= 'You currently have';
@@ -34,9 +33,6 @@ $lang['genepis']['friend3_field']			= 'Email 3';
 $lang['genepis']['invite_text_field_template1']			= "Hello,\nThis is ";
 $lang['genepis']['invite_text_field_template2']			= " and I would like to invite you to Ski-Manager which I'm playing online. It's a free browser game where you create and develop your ski resort.\nBy accepting my invitation you and I will get some great bonuses so if you want to join me click on this link: ";
 $lang['genepis']['friends_invited']			= 'An invitation email has been successfully sent to your friend(s).';
-$lang['genepis']['payment_done']			= 'Payment done successfully.';
-$lang['genepis']['payment_failed']			= 'Payment failed. Try again or contact us at '.CONST_ADMIN_EMAIL;
-$lang['genepis']['payment_param_failed']			= 'Payment failed due to bad parameters. Try again or contact us at '.CONST_ADMIN_EMAIL;
 
 // Invitation email
 $lang['genepis']['invitation_subject']  = 'A friend invited you to Ski-Manager - online game';
@@ -51,15 +47,4 @@ $lang['genepis']['invitation_body1'] = ' invited you to play Ski-Manager.<br>Ski
 $lang['genepis']['invitation_body2'] = '<br><br>Sincerely,<br>/Ski-Manager team.';
 
 
-// Paypal
-$lang['genepis']['payment_success'] = 'Thank you! Your payment was successful. Your account has been credited with the ordered Génépis and/or cash amount.';
-$lang['genepis']['item_name'] = 'Item Name';
-$lang['genepis']['amount_payed'] = 'Amount Paid';
-$lang['genepis']['payment_status'] = 'Payment Status';
-$lang['genepis']['transaction_id'] = 'Transaction ID';
-$lang['genepis']['genepis_purchased'] = 'Génépis purchased';
-$lang['genepis']['cash_purchased'] = 'Virtual cash purchased';
-$lang['genepis']['back_skimanager'] = 'Back to Ski-manager.net';
-
 $lang['genepis']['proceed_sandbox'] = 'Converting your account to sandbox mode will allow you to play with 1 000 000 000€ but the leaderboard in which you will compete will be separated from the main leaderboard. You account will not be reset. Please note that there is no way back to regular mode. Feel free to create a second account if you wish to have both modes in parallel.';
-

@@ -217,7 +217,7 @@ $lang['home']['euros']	= '€';
 $lang['home']['rush']	= 'Accélérer';
 $lang['home']['speed_up_for_genepis']	= 'Tu peux gagner du temps en dépenssant quelques Génépis. La construction/amélioration sera complétée instantanément.';
 $lang['home']['not_enough_genepis']	= 'Pas assez de Génépis pour l\'accélération';
-$lang['home']['not_enough_genepis_to_rush']	= 'Tu n\'as pas assez de Génépis pour accélérer ceci. Rends-toi à la page Génépis pour en acheter d\avantage.';
+$lang['home']['not_enough_genepis_to_rush']	= 'Tu n\'as pas assez de Génépis pour accélérer ceci. Tu peux en gagner avec les parrainages, les objectifs et les récompenses du jeu.';
 $lang['home']['you_have_rushed']	= 'Tu as accéléré';
 
 

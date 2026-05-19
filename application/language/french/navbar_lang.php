@@ -117,7 +117,7 @@ $lang['navbar']['more']               = 'Plus';
 $lang['navbar']['terms']              = 'Conditions d\'utilisation';
 $lang['navbar']['blog']               = 'Blog &amp; Actualités';
 $lang['navbar']['guide']              = 'Guide du jeu';
-$lang['navbar']['help_build']         = 'Aider à développer Ski-Manager';
+$lang['navbar']['help_build']         = 'Contribuer sur GitHub';
 
 $lang['navbar']['data_dashboard']   = 'Tableau de Bord';
 $lang['navbar']['government']         = 'Gouvernement &amp; Réglementations';

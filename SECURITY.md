@@ -48,7 +48,6 @@ In scope:
 - Player data access — unauthorized access to another player's resort, finances, or account
 - The ops dashboard (`api/ops.php`) and deploy pipeline
 - The night skiing API (`api/night_skiing.php`)
-- Payment flows (PayPal integration)
 - Account reset and deletion flows (`Reset_controller`)
 
 Out of scope:

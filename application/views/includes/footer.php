@@ -417,10 +417,10 @@ $_needs_datatables = in_array($this->router->class, $_datatables_controllers, tr
             <?php echo ($this->session->userdata('site_lang') === 'french') ? 'Ski-Manager est maintenant open source' : 'Ski-Manager is now open source'; ?>
         </p>
         <p class="sm-open-source-text">
-            <?php echo ($this->session->userdata('site_lang') === 'french') ? 'Consultez le code, proposez des changements ou suivez le developpement sur GitHub.' : 'View the code, suggest changes, or follow development on GitHub.'; ?>
+            <?php echo ($this->session->userdata('site_lang') === 'french') ? 'Consultez le code, corrigez des bugs, ajoutez des fonctionnalites et proposez vos changements avec une pull request.' : 'View the code, fix bugs, add features, and submit your changes with a pull request.'; ?>
         </p>
         <a class="sm-open-source-link" href="https://github.com/Ski-Manager-net/Manager" target="_blank" rel="noopener noreferrer">
-            GitHub <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            <?php echo ($this->session->userdata('site_lang') === 'french') ? 'Contribuer sur GitHub' : 'Contribute on GitHub'; ?> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
         </a>
     </div>
 </div>

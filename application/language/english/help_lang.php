@@ -8,7 +8,7 @@ $lang['help']['intro']      = 'A question about the game? Wonder how something w
 
 /* ─── Account & Access ─────────────────────────────── */
 $lang['help']['question']['1'] = 'Is Ski-Manager really free to play?';
-$lang['help']['answer']['1']   = 'Yes, completely! Ski-Manager is 100% free to play with no mandatory purchases. Optional premium currency (Génépis) can be used to speed up certain actions, but every single feature — slopes, lifts, staff, tournaments, finances — is accessible to every player at no cost, forever.';
+$lang['help']['answer']['1']   = 'Yes, completely! Ski-Manager is 100% free to play. Génépis can be earned in game and used to speed up certain actions, but every single feature — slopes, lifts, staff, tournaments, finances — is accessible to every player at no cost, forever.';
 
 $lang['help']['question']['2'] = 'Do I need to download or install anything?';
 $lang['help']['answer']['2']   = 'No download or installation is required. Ski-Manager runs entirely in your web browser on any device — desktop, laptop, tablet or mobile. Simply visit ski-manager.net, create a free account and start playing instantly.';
@@ -66,8 +66,8 @@ $lang['help']['question']['18'] = 'How is my resort compared to other players?';
 $lang['help']['answer']['18']   = 'Your resort is scored based on total reputation, visitor numbers, cumulative revenue and tournament wins. All scores are displayed on the global leaderboard. The leaderboard updates daily and ranks resorts from around the world. Your goal is to reach the top by managing your resort efficiently, investing wisely and hosting successful events.';
 
 /* ─── Technical & Other ────────────────────────────── */
-$lang['help']['question']['19'] = 'What is Génépis premium currency?';
-$lang['help']['answer']['19']   = 'Génépis is the optional premium currency in Ski-Manager. It can be used to instantly complete building construction, skip waiting timers or unlock cosmetic upgrades. It is never required — every feature and piece of content is accessible without spending Génépis. You can earn small amounts of Génépis through in-game achievements and daily bonuses.';
+$lang['help']['question']['19'] = 'What are Génépis?';
+$lang['help']['answer']['19']   = 'Génépis is an in-game currency in Ski-Manager. It can be used to instantly complete building construction, skip waiting timers or unlock cosmetic upgrades. It is never required — every feature and piece of content is accessible without spending Génépis. You can earn Génépis through referrals, in-game achievements and daily bonuses.';
 
 $lang['help']['question']['20'] = 'Is my progress saved automatically?';
 $lang['help']['answer']['20']   = 'Yes. All actions in Ski-Manager are saved to the server in real time. There is no manual save required. Your resort continues to run while you are offline — visitors still arrive, finances update daily and buildings continue operating. Just log back in to check your progress and make decisions.';

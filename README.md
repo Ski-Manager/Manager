@@ -111,7 +111,6 @@ Both beginner-friendly and advanced contributions are welcome.
 | Caching | Redis / Memcached |
 | Sessions | CodeIgniter Sessions |
 | Authentication | Custom Auth + Google OAuth + CrazyGames SDK |
-| Payments | PayPal |
 | Web Server | Apache |
 | Reverse Proxy | NGINX / OpenResty |
 | CDN / WAF | Cloudflare |

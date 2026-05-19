@@ -16,7 +16,6 @@ $lang['genepis']['get_genepis_1']			= 'Lors de la création de ton compte, tu ob
 $lang['genepis']['get_genepis_2']			= 'Lorsque tu invites des amis sur le jeu, tu seras également crédité de '.GENEPIS.' Génépis après qu\'ils aient complété quelques objectifs.';
 $lang['genepis']['get_genepis_3']			= 'En cliquant sur les annonces ci-dessous pour gagner des Génépis gratuits.';
 $lang['genepis']['get_genepis_4']			= 'En utilisant l\'un des services SMS ou téléphonique ci-dessous.';
-$lang['genepis']['get_genepis_5']			= 'En les achetant avec le service de payment sécurisé Paypal, disponible en bas de page.';
 
 
 $lang['genepis']['current_balance']			= 'Tu as actuellement';
@@ -34,9 +33,6 @@ $lang['genepis']['friend3_field']			= 'Email 3';
 $lang['genepis']['invite_text_field_template1']			= "Bonjour,\nJe suis ";
 $lang['genepis']['invite_text_field_template2']			= " et je voudrais t\'inviter à Ski-Manager qui est un jeu en ligne auquel je joue actuellement. C'est un jeu par navigateur gratuit où tu peux créer et développer ta station de ski.\nEn acceptant mon invitation, tu obtiendras de super bonus, donc si tu veux me rejoindre, clique sur ce lien: ";
 $lang['genepis']['friends_invited']			= 'Un email d\'invitation a été envoyé avec succès à ton/tes ami(s).';
-$lang['genepis']['payment_done']			= 'Paiement effectué avec succès.';
-$lang['genepis']['payment_failed']			= 'Paiement échoué. Réessaie ou contacte-nous à '.CONST_ADMIN_EMAIL;
-$lang['genepis']['payment_param_failed']			= 'Le paiement a échoué en raison de mauvais paramètres. Réessaie ou contacte-nous à '.CONST_ADMIN_EMAIL;
 
 // Invitation email
 $lang['genepis']['invitation_subject']  = 'Un ami t\'a invité à Ski-Manager - jeu en ligne';
@@ -49,15 +45,5 @@ $lang['genepis']['invitation_body1'] = ' t\'a invité à jouer à Ski-Manager. <
                                         Il n\'y a rien à télécharger et rien à installer: inscris-toi et joue! 
                                         S\'inscrire maintenant:<br>';
 $lang['genepis']['invitation_body2'] = '<br><br>Cordialement,<br>/L\'équipe Ski-Manager.';
-
-// Paypal
-$lang['genepis']['payment_success'] = 'Merci! Votre paiement a réussi. Votre compte a été crédité du montant de Génépis et/ou fonds commandé.';
-$lang['genepis']['item_name'] = 'Nom de l\'article';
-$lang['genepis']['amount_payed'] = 'Montant payé';
-$lang['genepis']['payment_status'] = 'Status du paiement';
-$lang['genepis']['transaction_id'] = 'ID de la transaction';
-$lang['genepis']['genepis_purchased'] = 'Génépis achetés';
-$lang['genepis']['cash_purchased'] = 'Argent (virtuel) acheté';
-$lang['genepis']['back_skimanager'] = 'Retour à Ski-manager.net';
 
 $lang['genepis']['proceed_sandbox'] = 'La conversion de ton compte en mode illimité te permettra de jouer avec 1 000 000 000€ mais le classement dans lequel tu seras placé sera séparé du classement principal. Ton compte ne sera pas réinitialisé. Il n\'est pas possible de reconvertir le compte en mode normal normal. N\'hésite pas à créer un deuxième compte si tu souhaites avoir les deux modes en parallèle.';

@@ -27,10 +27,6 @@ echo '<h2 class="h2">'.$this->lang->line('home')['genepis_title'].'</h2>';
         echo '<ul>';
         echo '<li>'.$this->lang->line('genepis')['get_genepis_1'].'</li>';
         echo '<li>'.$this->lang->line('genepis')['get_genepis_2'].'</li>';
-        echo '<li>'.$this->lang->line('genepis')['get_genepis_5'].'</li>';
-        //echo '<li>'.$this->lang->line('genepis')['get_genepis_3'].'</li>';
-        //echo '<li>'.$this->lang->line('genepis')['get_genepis_4'].'</li>';
-        //echo '<li>'.$this->lang->line('genepis')['get_genepis_5'].'</li>';
         echo '</ul>';?>
         </div>
         <div class="md:col-span-2">
@@ -95,32 +91,6 @@ echo '<h2 class="h2">'.$this->lang->line('home')['genepis_title'].'</h2>';
             echo '</div>';        
             ?>
 
-         <!--   <div class="md:col-span-12 padding_top_bot_15">
-
-                <?php if(!empty($products)){ foreach($products as $row){ ?>
-                    <div class="col-span-12 sm:col-span-2 lg:col-span-2">
-                        <div class="card">
-                            <img src="<?php echo base_url('img/icons/'.$row['image']); ?>" alt="<?php echo htmlspecialchars($row['name'], ENT_QUOTES, 'UTF-8'); ?>" />
-                            <div class="caption">
-                                <h4 class="h4 float-right"><?php echo $row['price']; ?> USD</h4>
-                                <h4 class="h4"><?php echo $row['name']; ?></h4>
-                                <h2 class="h2 center"><?php if (isset($row[$comment_language]) && $row[$comment_language] != '') echo $row[$comment_language]; else echo '<br>'; ?></h2>
-                            </div>
-                            
-                            <div class="ratings">
-                                <a href="<?php echo base_url('genepis_controller/buy/'.$row['id']); ?>">
-                                    <img data-type="product" id ="<?php echo $row['id']; ?>" src="<?php echo base_url('img/icons/paypal_buy_now.png'); ?>" alt="Buy now with PayPal" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                <?php } }else{ ?>
-                    <p>Product(s) not found...</p>
-                <?php } ?>
-
-            </div>
-			-->
-            
         </div>
         
         <div class="md:col-span-12">

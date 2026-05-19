@@ -119,7 +119,7 @@ $lang['navbar']['more']               = 'More';
 $lang['navbar']['terms']              = 'Terms of Service';
 $lang['navbar']['blog']               = 'Blog &amp; News';
 $lang['navbar']['guide']              = 'Game Guide';
-$lang['navbar']['help_build']         = 'Help Build Ski-Manager';
+$lang['navbar']['help_build']         = 'Contribute on GitHub';
 
 $lang['navbar']['data_dashboard']   = 'Data Dashboard';
 $lang['navbar']['micro_events']       = '⚡ Quick Decisions';

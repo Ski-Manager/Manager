@@ -3002,24 +3002,6 @@ $('.reload-captcha').click(function(event){
  });
  
 
-// Genepis page only
-if (window.location.href == 'https://www.ski-manager.net/genepis_controller' || window.location.href == 'https://127.0.0.1/ski-manager/genepis_controller' || window.location.href == 'https://localhost/ski-manager/genepis_controller') {  
-
-   // 8 is the ID of the "unlimited funds" product
-   $('img[id="8"]').on("click", function(e){
-    product_id = $('#8').attr('id');
-    
-    text = Settings.proceed_sandbox;
-    var r = confirm(text);
-    if (r != true) {    // If user presses CANCEL, close pop-up and do not proceed to Paypal
-        return false;
-    }
-    // If user presses OK, proceed to
-    
-   });
-
-}
- 
 //GOOGLE CHARTS START
 if (window.location.href.indexOf('finances_controller') !== -1) {
 //if (window.location.href == 'https://www.ski-manager.net/finances_controller' || window.location.href == 'https://127.0.0.1/ski-manager/finances_controller' || window.location.href == 'https://localhost/ski-manager/finances_controller') {  
@@ -4089,4 +4071,3 @@ function update_reputation() {
     window.deleteEvent = deleteEvent;
     window.editEvent = editEvent;
 }());
-
