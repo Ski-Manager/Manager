@@ -365,10 +365,10 @@ $_needs_datatables = in_array($this->router->class, $_datatables_controllers, tr
                         <a href="https://www.facebook.com/Ski-Manager-1377272882355150/" target="_blank" rel="noopener noreferrer" class="footer-social-link">
                             <i class="fa-brands fa-facebook mr-2"></i>Facebook
                         </a>
-                        <a href="https://forms.gle/XwEB3MxPSupAEzw97" target="_blank" rel="noopener noreferrer" class="footer-social-link">
+                        <a href="https://github.com/Ski-Manager-net/Manager/issues" target="_blank" rel="noopener noreferrer" class="footer-social-link">
                             <i class="fa-solid fa-bug mr-2"></i><?php echo $this->lang->line('home')['report_bug'] ?? 'Report a Bug'; ?>
                         </a>
-                        <a href="https://form.jotform.com/260655088793066" target="_blank" rel="noopener noreferrer" class="footer-social-link">
+                        <a href="https://github.com/Ski-Manager-net/Manager" target="_blank" rel="noopener noreferrer" class="footer-social-link">
                             <i class="fa-solid fa-screwdriver-wrench mr-2"></i><?php echo $this->lang->line('navbar')['help_build'] ?? 'Help Build Ski-Manager'; ?>
                         </a>
                     </div>
@@ -400,12 +400,54 @@ $_needs_datatables = in_array($this->router->class, $_datatables_controllers, tr
 </button>
 
 <!-- Report a Bug floating button -->
-<a id="report-bug-btn" href="https://forms.gle/XwEB3MxPSupAEzw97" target="_blank" rel="noopener noreferrer" title="Report a Bug" aria-label="Report a Bug">
+<a id="report-bug-btn" href="https://github.com/Ski-Manager-net/Manager/issues" target="_blank" rel="noopener noreferrer" title="Report a Bug" aria-label="Report a Bug">
     <i class="fa-solid fa-bug" aria-hidden="true"></i>
 </a>
 
+<!-- Open source announcement -->
+<div id="sm-open-source-popup" role="dialog" aria-labelledby="sm-open-source-title" aria-live="polite">
+    <button id="sm-open-source-close" type="button" aria-label="<?php echo ($this->session->userdata('site_lang') === 'french') ? 'Fermer' : 'Close'; ?>">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+    <div class="sm-open-source-icon" aria-hidden="true">
+        <i class="fa-brands fa-github"></i>
+    </div>
+    <div class="sm-open-source-copy">
+        <p id="sm-open-source-title" class="sm-open-source-title">
+            <?php echo ($this->session->userdata('site_lang') === 'french') ? 'Ski-Manager est maintenant open source' : 'Ski-Manager is now open source'; ?>
+        </p>
+        <p class="sm-open-source-text">
+            <?php echo ($this->session->userdata('site_lang') === 'french') ? 'Consultez le code, proposez des changements ou suivez le developpement sur GitHub.' : 'View the code, suggest changes, or follow development on GitHub.'; ?>
+        </p>
+        <a class="sm-open-source-link" href="https://github.com/Ski-Manager-net/Manager" target="_blank" rel="noopener noreferrer">
+            GitHub <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+
 <!-- Toast notification container (DaisyUI toast) -->
 <div id="sm-toast-container" class="toast toast-top toast-end sm-toast-container" aria-live="polite" aria-atomic="true"></div>
+
+<script>
+(function () {
+    var popup = document.getElementById('sm-open-source-popup');
+    var close = document.getElementById('sm-open-source-close');
+    if (!popup || !close) { return; }
+
+    var dismissed = false;
+    try { dismissed = localStorage.getItem('sm_open_source_notice_dismissed') === '1'; } catch (e) {}
+    if (!dismissed) {
+        requestAnimationFrame(function () {
+            popup.classList.add('sm-open-source-popup-visible');
+        });
+    }
+
+    close.addEventListener('click', function () {
+        popup.classList.remove('sm-open-source-popup-visible');
+        try { localStorage.setItem('sm_open_source_notice_dismissed', '1'); } catch (e) {}
+    });
+}());
+</script>
 <!-- Site-wide UX/UI enhancements – wrapped in DOMContentLoaded so deferred jQuery is ready.
      Falls back to window.load when the jQuery CDN fails and the local fallback is still
      loading at DOMContentLoaded time. -->

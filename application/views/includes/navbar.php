@@ -627,7 +627,7 @@
                 </a>
             </li>
             <li>
-                <a  href="https://form.jotform.com/260655088793066" target="_blank" rel="noopener noreferrer">
+                <a  href="https://github.com/Ski-Manager-net/Manager" target="_blank" rel="noopener noreferrer">
                     <i class="fa-solid fa-screwdriver-wrench mr-1"></i><?php echo $this->lang->line('navbar')['help_build'] ?? 'Help Build Ski-Manager'; ?>
                 </a>
             </li>
