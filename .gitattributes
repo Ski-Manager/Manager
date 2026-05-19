@@ -1,0 +1,10 @@
+js/home_admin.js filter=git-crypt diff=git-crypt
+js/home_admin.min.js filter=git-crypt diff=git-crypt
+application/views/admin/** filter=git-crypt diff=git-crypt
+application/models/admin/** filter=git-crypt diff=git-crypt
+application/controllers/admin/** filter=git-crypt diff=git-crypt
+application/language/french/admin_pages_lang.php filter=git-crypt diff=git-crypt
+application/language/english/admin_pages_lang.php filter=git-crypt diff=git-crypt
+application/migrations/20260312000000_add_admin_chat.php filter=git-crypt diff=git-crypt
+application/views/templates/default_admin.php filter=git-crypt diff=git-crypt
+application/views/includes/footer_admin.php filter=git-crypt diff=git-crypt
