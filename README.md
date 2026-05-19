@@ -1,174 +1,409 @@
 # Ski Manager
 
-Ski Manager is a browser-based ski resort management simulation game. Players build and operate a virtual ski resort — managing lifts, slopes, snowmaking, staff, finances, guests, and long-term strategy across real simulated seasons.
+Ski Manager is an open-source browser-based ski resort management simulation game where players build, operate, and expand a fully simulated ski resort across dynamic seasons.
+
+The project combines business management, guest simulation, mountain operations, weather systems, infrastructure planning, and long-term strategy into a large-scale resort management experience inspired by classic tycoon and simulation games.
+
+The goal of the project is to build the most advanced open-source ski resort simulator on the web.
 
 ---
 
-## Features
+## Website
 
-### Resort Operations
-- Lift management (construction, upgrades, lift lines, lift network, scenic lifts)
-- Slope and trail management (grooming, snowmaking per trail, slope upgrades)
-- Snow cannon fleet and snowmaking operations
-- Night skiing with configurable lighting levels
-- Mountain plan and resort map
+- Production game: :contentReference[oaicite:0]{index=0}
+- Bug tracker / automated analysis: :contentReference[oaicite:1]{index=1}
 
-### Guest Experience
-- Dynamic guest AI and visitor needs simulation
-- Demand curve and crowding management
-- Ski school, rental shop, and guided tours
-- VIP loyalty program
-- Guest skill progression system
+---
 
-### Facilities & Revenue
+# Open Source Goals
+
+Ski Manager is actively developed and community contributions are encouraged.
+
+Contributors can help with:
+
+- New gameplay systems
+- UI/UX improvements
+- Performance optimization
+- PHP 8 compatibility fixes
+- AI simulation improvements
+- Mobile responsiveness
+- Database optimization
+- Balancing and economy tuning
+- Security improvements
+- API development
+- DevOps and CI/CD
+- Documentation
+- Bug fixes and refactoring
+
+Both beginner-friendly and advanced contributions are welcome.
+
+---
+
+# Core Gameplay Systems
+
+## Resort Operations
+
+- Lift construction and upgrades
+- Lift queues and transport simulation
+- Scenic gondolas and sightseeing systems
+- Slope creation and terrain management
+- Grooming operations
+- Snowmaking systems
+- Snow cannon fleet management
+- Night skiing
+- Resort map and mountain planning
+- Terrain expansion
+
+## Guest Simulation
+
+- Dynamic guest AI
+- Crowd flow and congestion systems
+- Skill progression
+- Guest happiness and satisfaction
+- VIP guests and loyalty systems
+- Rental shop systems
+- Ski school and guided tours
+- Dynamic demand simulation
+
+## Business & Economy
+
+- Resort finances and accounting
+- Marketing campaigns
+- Sponsorship systems
+- Insurance systems
+- Dynamic pricing
+- Parking systems
+- Season passes and ticketing
 - Hotel and accommodation management
-- Restaurant, retail, and leisure facilities
-- Luxury amenities and event venues
-- Season passes and daily ski passes (with group discounts and parking fees)
-- Building access control with dynamic pricing
+- Food, retail, and entertainment venues
+- Real estate and town expansion
+- Multi-resort empire management
 
-### Finance & Business
-- Resort bank and financial reporting
-- Insurance management
-- PayPal payment integration
-- Sponsorship and marketing campaigns
-- Real estate and town development
-- Empire mode (multi-resort management)
+## Environment & Infrastructure
 
-### Events & Engagement
-- Special events and tournaments
-- Celebrity visits and micro-events
-- Mini-games and ski quiz
-- Daily bonus system
-- Achievements
-
-### Analytics & Strategy
-- Data dashboard and reporting
-- Leaderboard (global, by country, by slope)
-- Competitor analysis
-- Seasonal objectives
-- R&D upgrades
-
-### Environment & Infrastructure
-- Climate change simulation
+- Weather simulation
+- Climate change systems
 - Energy management
-- Microclimate and weather systems
-- Transportation and ski bus
+- Ski buses and transportation
+- Emergency response systems
 - Government relations
-- Emergency and crisis management
+- Microclimate simulation
 
-### Platform
-- Maintenance mode and closed/pre-launch mode
-- Multi-language support (i18n via Language Switcher)
-- CrazyGames SDK integration
-- Google OAuth login
-- Cron-driven simulation (nightly, morning, 2-minute, and event cycles)
-- REST API for external data consumers
-- Blog, guide, and help pages
+## Events & Multiplayer Features
+
+- Tournaments
+- Seasonal events
+- Leaderboards
+- Daily rewards
+- Achievements
+- Competitor analysis
+- Analytics dashboards
 
 ---
 
-## Tech Stack
+# Technology Stack
 
 | Layer | Technology |
 |---|---|
-| Backend framework | CodeIgniter 3 (PHP) |
-| Database | MySQL |
+| Backend Framework | CodeIgniter 3 (PHP) |
+| Language | PHP 8+ |
+| Database | MySQL / MariaDB |
 | Caching | Redis / Memcached |
-| Sessions | Database or file-based (CodeIgniter Session) |
-| Auth | Custom + Google OAuth + CrazyGames SDK |
+| Sessions | CodeIgniter Sessions |
+| Authentication | Custom Auth + Google OAuth + CrazyGames SDK |
 | Payments | PayPal |
-| Web server | Apache (`.htaccess` URL rewriting) |
-| Reverse proxy | NGINX / OpenResty (optional) |
-| CDN / WAF | Cloudflare (optional) |
-| CI/CD | GitHub Actions → SSH deploy to VPS |
-| Server management | 1Panel |
+| Web Server | Apache |
+| Reverse Proxy | NGINX / OpenResty |
+| CDN / WAF | Cloudflare |
+| Deployment | GitHub Actions |
+| Infrastructure | VPS + 1Panel |
 
 ---
 
-## Project Structure
+# Project Structure
 
-```
+```text
 .
 ├── application/
-│   ├── config/           # CI3 config files (database, routes, game constants)
-│   ├── controllers/      # One controller per game module + crons/ subfolder
-│   ├── models/           # Data models
-│   ├── views/            # Rendered HTML views
-│   └── helpers/          # Custom helper functions
-├── system/               # CodeIgniter 3 core (do not modify)
-├── api/                  # Standalone REST endpoints (ops, night skiing)
+│   ├── config/           # CI3 config files and game constants
+│   ├── controllers/      # Main game controllers
+│   ├── controllers/crons # Simulation cron controllers
+│   ├── models/           # Database models
+│   ├── views/            # HTML templates/views
+│   ├── helpers/          # Custom helper functions
+│   └── libraries/        # Custom libraries and integrations
+│
+├── api/                  # Standalone REST/API endpoints
+├── system/               # CodeIgniter core
+├── assets/               # CSS, JS, images, UI assets
+├── uploads/              # User-generated content
+│
 ├── .github/
-│   ├── workflows/        # GitHub Actions deploy pipeline
+│   ├── workflows/        # GitHub Actions CI/CD
 │   └── dependabot.yml
-├── .htaccess             # Apache URL rewriting + security rules
-├── .user.ini             # PHP runtime overrides
-├── Users_model.php       # Core user model
-├── 404.html
-├── ads.txt
+│
+├── .htaccess
+├── .user.ini
 ├── README.md
 ├── ARCHITECTURE.md
+├── LICENSE
 └── .gitignore
 ```
 
-### Cron Jobs
+---
 
-Scheduled tasks drive the game simulation engine:
+# Simulation Engine
 
-| Cron | Trigger | Purpose |
+The game runs on a cron-driven simulation system.
+
+## Cron Jobs
+
+| Cron Controller | Frequency | Purpose |
 |---|---|---|
-| `Cron2min_controller` | Every 2 min | Real-time updates |
-| `CronMorning_controller` | Daily morning | New-day setup |
-| `NightlyMainJobs_controller` | Nightly | Core simulation tick |
-| `CronPostNightlyJobs_controller` | Post-nightly | Follow-up calculations |
-| `CronSpecialEvents_controller` | Scheduled | Event processing |
+| `Cron2min_controller` | Every 2 minutes | Real-time resort updates |
+| `CronMorning_controller` | Daily | New-day initialization |
+| `NightlyMainJobs_controller` | Nightly | Main simulation processing |
+| `CronPostNightlyJobs_controller` | Nightly | Post-processing calculations |
+| `CronSpecialEvents_controller` | Scheduled | Event handling |
 | `CronTournaments_controller` | Scheduled | Tournament processing |
-| `NightlyDBBackup_controller` | Nightly | Database backup |
+| `NightlyDBBackup_controller` | Nightly | Automated backups |
 | `ReportingData_controller` | Scheduled | Analytics aggregation |
+
+The cron system powers:
+
+- Guest movement
+- Resort economy
+- Weather progression
+- Staff systems
+- Snow conditions
+- Event generation
+- AI decisions
+- Leaderboards
+- Financial calculations
 
 ---
 
-## Getting Started
+# Getting Started
 
-### Requirements
+## Requirements
 
 - PHP 8.0+
 - MySQL 5.7+ or MariaDB 10+
-- Apache with `mod_rewrite` enabled
-- Redis or Memcached (optional but recommended)
-- A VPS or shared hosting environment supporting `.htaccess`
+- Apache with `mod_rewrite`
+- Redis or Memcached (recommended)
+- Linux VPS or shared hosting
+- Cron access
 
-### Setup
+---
 
-1. Clone the repo and copy to your web root.
-2. Copy `application/config/database.php` and fill in your DB credentials.
-3. Copy `application/config/config.php` and set `base_url`, encryption keys, and environment flags.
-4. Import the database schema (see `docs/` or your migration setup).
-5. Configure cron jobs on the server to hit the cron controllers on schedule.
-6. Set `maintenance_mode` or `closed_mode` in `config.php` as needed during launch.
+## Installation
 
-### Deployment
+### 1. Clone the Repository
 
-Deployment is automated via GitHub Actions on push to `main`. Requires three repository secrets:
+```bash
+git clone https://github.com/YOUR_ORG/ski-manager.git
+```
 
-| Secret | Value |
+### 2. Configure the Database
+
+Edit:
+
+```text
+application/config/database.php
+```
+
+Add your MySQL credentials.
+
+---
+
+### 3. Configure the Application
+
+Edit:
+
+```text
+application/config/config.php
+```
+
+Set:
+
+- `base_url`
+- encryption keys
+- environment settings
+- maintenance flags
+
+---
+
+### 4. Import the Database
+
+Import your SQL schema into MySQL/MariaDB.
+
+---
+
+### 5. Configure Cron Jobs
+
+Set up cron jobs to trigger the simulation controllers.
+
+Example:
+
+```bash
+*/2 * * * * php /path/to/index.php cron/Cron2min_controller
+```
+
+---
+
+### 6. Configure Web Server
+
+Enable Apache rewrite rules:
+
+```bash
+a2enmod rewrite
+```
+
+Ensure `.htaccess` overrides are enabled.
+
+---
+
+# Deployment
+
+Deployments are automated using GitHub Actions.
+
+## Required GitHub Secrets
+
+| Secret | Description |
 |---|---|
-| `VPS_SSH_KEY` | Private SSH key for the VPS |
+| `VPS_SSH_KEY` | SSH private key |
 | `VPS_USER` | SSH username |
-| `VPS_HOST` | VPS hostname or IP |
+| `VPS_HOST` | VPS IP or hostname |
 
-See `.github/workflows/deploy.yml` for the full pipeline.
-
----
-
-## Configuration Notes
-
-- **Game pricing constants** live in `application/config/game_pricing.php` — ski pass limits, group discounts, parking fees, and night skiing quality factors.
-- **Maintenance / closed mode** is toggled in `application/config/config.php` and enforced in `application/config/routes.php`. Whitelisted IPs (e.g. dev team) bypass these modes.
-- **Cron routes** are defined before the maintenance catch-all in `routes.php` so scheduled jobs always run regardless of site mode.
+CI/CD automatically deploys changes to production after pushes to `main`.
 
 ---
 
-## License
+# Contributing
 
-See [LICENSE](LICENSE) for full terms.
+Community contributions are highly encouraged.
+
+## Recommended Contribution Areas
+
+### Gameplay Systems
+- New lifts
+- New weather systems
+- AI improvements
+- Resort balancing
+- Staff management
+- Terrain systems
+
+### Technical Improvements
+- PHP 8 modernization
+- Database optimization
+- Redis caching
+- API expansion
+- Security hardening
+- Refactoring legacy CI3 code
+
+### Frontend
+- Mobile UI improvements
+- Accessibility
+- Responsive layouts
+- Improved dashboards
+- Interactive maps
+
+### Infrastructure
+- Docker support
+- Better CI/CD
+- Monitoring
+- Automated testing
+
+---
+
+## Contribution Workflow
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit changes
+4. Open a pull request
+5. Link related issues or bug reports
+
+---
+
+## Coding Guidelines
+
+- Follow existing CodeIgniter 3 patterns where practical
+- Avoid modifying `/system`
+- Keep controllers thin and move logic into models/helpers
+- Prefer reusable components/helpers
+- Test cron-related changes carefully
+- Maintain backward compatibility where possible
+
+---
+
+# Development Notes
+
+## Maintenance / Closed Mode
+
+Maintenance and pre-launch restrictions are controlled in:
+
+```text
+application/config/config.php
+```
+
+Routing behavior is enforced in:
+
+```text
+application/config/routes.php
+```
+
+Whitelisted developer IPs can bypass restrictions.
+
+---
+
+## Pricing & Economy Configuration
+
+Core pricing constants live in:
+
+```text
+application/config/game_pricing.php
+```
+
+Includes:
+
+- Ski pass pricing
+- Parking fees
+- Group discounts
+- Night skiing modifiers
+- Economy balancing constants
+
+---
+
+# QA & Automated Bug Tracking
+
+Static analysis results, automated scans, and generated bug reports are tracked here:
+
+:contentReference[oaicite:2]{index=2}
+
+Contributors are encouraged to review unresolved issues and submit fixes.
+
+---
+
+# Roadmap Ideas
+
+Planned or possible future systems include:
+
+- Multiplayer economy
+- Live weather APIs
+- 3D resort map
+- Steam integration
+- Modding support
+- Avalanche systems
+- Dynamic terrain editor
+- VR compatibility
+- Dedicated mobile app
+- Staff unions and labor systems
+- Advanced AI competitors
+- Procedural mountain generation
+
+---
+
+# License
+
+See [LICENSE](LICENSE) for full licensing details.
