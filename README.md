@@ -11,7 +11,7 @@ The goal of the project is to build the most advanced open-source ski resort sim
 ## Website
 
 - Production game: https://ski-manager.net
-- Bug tracker / automated analysis: https://docs.google.com/spreadsheets/d/1CcNFAsFVS9rXGUQqlRAj2NNu5vp7rwL-hMji2oB2LLs/edit?usp=sharing
+- Auto generates bugs: https://docs.google.com/spreadsheets/d/1CcNFAsFVS9rXGUQqlRAj2NNu5vp7rwL-hMji2oB2LLs/edit?usp=sharing
 
 ---
 
