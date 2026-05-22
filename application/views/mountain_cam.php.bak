@@ -1,0 +1,231 @@
+<div class="w-full">
+<?php
+
+echo '<h2 class="h2">' . $this->lang->line('building')['mountain_cam_title'] . '</h2>';
+echo '<p>' . $this->lang->line('building')['mountain_cam_page_intro'] . '</p>';
+
+if (isset($infoMessage) && $infoMessage != '') {
+    $msg_keys = [
+        'mountain_cam_settings_saved',
+        'mountain_cam_invalid_settings',
+        'mountain_cam_save_error',
+    ];
+    if (in_array($infoMessage, $msg_keys, TRUE)) {
+        echo $this->lang->line('building')[$infoMessage];
+    }
+}
+?>
+
+<!-- ===== How it works ===== -->
+<div class="card bg-base-100 shadow-sm "><div class="card-body mb-3">
+    <div class="col-span-12">
+        <div class="card bg-base-100 shadow-sm "><div class="card-body mb-3" style="max-width:700px;">
+            <h4 class="h4"><?php echo $this->lang->line('building')['mountain_cam_how_it_works']; ?></h4>
+            <p><?php echo $this->lang->line('building')['mountain_cam_how_it_works_desc']; ?></p>
+            <ul>
+                <li><?php echo $this->lang->line('building')['mountain_cam_mechanic_visitors']; ?></li>
+                <li><?php echo $this->lang->line('building')['mountain_cam_mechanic_cost']; ?></li>
+                <li><?php echo $this->lang->line('building')['mountain_cam_mechanic_reputation']; ?></li>
+                <li><?php echo $this->lang->line('building')['mountain_cam_mechanic_quality']; ?></li>
+                <li><?php echo $this->lang->line('building')['mountain_cam_mechanic_stream']; ?></li>
+                <li><?php echo $this->lang->line('building')['mountain_cam_mechanic_social']; ?></li>
+                <li><?php echo $this->lang->line('building')['mountain_cam_mechanic_night_vision']; ?></li>
+                <li><?php echo $this->lang->line('building')['mountain_cam_mechanic_weather_overlay']; ?></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ===== Settings card ===== -->
+<div class="card bg-base-100 shadow-sm "><div class="card-body mb-3">
+    <div class="col-span-12">
+        <div class="card bg-base-100 shadow-sm "><div class="card-body mb-3" style="max-width:560px;">
+            <h4 class="h4"><?php echo $this->lang->line('building')['mountain_cam_settings_title']; ?></h4>
+            <form method="post" action="<?php echo base_url('mountain_cam_controller/save'); ?>">
+                <input type="hidden" name="mountain_cam_form" value="1">
+
+                <!-- Enable toggle -->
+                <div class="mb-3">
+                    <div class="flex items-center gap-2">
+                        <input class="toggle" type="checkbox"
+                               id="is_enabled" name="is_enabled" value="1"
+                               <?php echo ($is_enabled == 1) ? 'checked' : ''; ?>>
+                        <label for="is_enabled">
+                            <?php echo $this->lang->line('building')['mountain_cam_enable_label']; ?>
+                        </label>
+                    </div>
+                    <div class="text-sm opacity-60"><?php echo $this->lang->line('building')['mountain_cam_enable_help']; ?></div>
+                </div>
+
+                <!-- Number of cameras -->
+                <div class="mb-3">
+                    <label for="num_cams" class="form-label">
+                        <?php echo $this->lang->line('building')['mountain_cam_num_cams_label']; ?>
+                        <small class="text-base-content/60">(<?php echo $min_cams; ?>–<?php echo $max_cams; ?>)</small>
+                    </label>
+                    <input type="number" id="num_cams" name="num_cams"
+                           class="input input-sm" style="max-width:80px;"
+                           min="<?php echo $min_cams; ?>" max="<?php echo $max_cams; ?>"
+                           value="<?php echo (int)$num_cams; ?>">
+                    <div class="text-sm opacity-60"><?php echo $this->lang->line('building')['mountain_cam_num_cams_help']; ?></div>
+                </div>
+
+                <!-- Camera quality -->
+                <div class="mb-3">
+                    <label class="font-bold"><?php echo $this->lang->line('building')['mountain_cam_quality_label']; ?></label>
+                    <div>
+                    <?php foreach ($valid_qualities as $q): ?>
+                        <div class="form-check inline-flex items-center gap-2">
+                            <input class="radio" type="radio" name="cam_quality"
+                                   id="cam_quality_<?php echo $q; ?>" value="<?php echo $q; ?>"
+                                   <?php echo ($q === $cam_quality) ? 'checked' : ''; ?>>
+                            <label class="cursor-pointer" for="cam_quality_<?php echo $q; ?>">
+                                <?php echo $this->lang->line('building')['mountain_cam_quality_' . $q]; ?>
+                            </label>
+                        </div>
+                    <?php endforeach; ?>
+                    </div>
+                    <div class="text-sm opacity-60"><?php echo $this->lang->line('building')['mountain_cam_quality_help']; ?></div>
+                </div>
+
+                <!-- Streaming mode -->
+                <div class="mb-3">
+                    <div class="flex items-center gap-2">
+                        <input class="toggle" type="checkbox"
+                               id="stream_mode" name="stream_mode" value="1"
+                               <?php echo ($stream_mode == 1) ? 'checked' : ''; ?>>
+                        <label for="stream_mode">
+                            <?php echo $this->lang->line('building')['mountain_cam_stream_label']; ?>
+                        </label>
+                    </div>
+                    <div class="text-sm opacity-60"><?php echo $this->lang->line('building')['mountain_cam_stream_help']; ?></div>
+                </div>
+
+                <!-- Social media sharing -->
+                <div class="mb-3">
+                    <div class="flex items-center gap-2">
+                        <input class="toggle" type="checkbox"
+                               id="social_media" name="social_media" value="1"
+                               <?php echo ($social_media == 1) ? 'checked' : ''; ?>>
+                        <label for="social_media">
+                            <?php echo $this->lang->line('building')['mountain_cam_social_label']; ?>
+                        </label>
+                    </div>
+                    <div class="text-sm opacity-60"><?php echo $this->lang->line('building')['mountain_cam_social_help']; ?></div>
+                </div>
+
+                <!-- Night vision mode -->
+                <div class="mb-3">
+                    <div class="flex items-center gap-2">
+                        <input class="toggle" type="checkbox"
+                               id="night_vision" name="night_vision" value="1"
+                               <?php echo ($night_vision == 1) ? 'checked' : ''; ?>>
+                        <label for="night_vision">
+                            <?php echo $this->lang->line('building')['mountain_cam_night_vision_label']; ?>
+                        </label>
+                    </div>
+                    <div class="text-sm opacity-60"><?php echo $this->lang->line('building')['mountain_cam_night_vision_help']; ?></div>
+                </div>
+
+                <!-- Weather overlay -->
+                <div class="mb-3">
+                    <div class="flex items-center gap-2">
+                        <input class="toggle" type="checkbox"
+                               id="weather_overlay" name="weather_overlay" value="1"
+                               <?php echo ($weather_overlay == 1) ? 'checked' : ''; ?>>
+                        <label for="weather_overlay">
+                            <?php echo $this->lang->line('building')['mountain_cam_weather_overlay_label']; ?>
+                        </label>
+                    </div>
+                    <div class="text-sm opacity-60"><?php echo $this->lang->line('building')['mountain_cam_weather_overlay_help']; ?></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <?php echo $this->lang->line('building')['mountain_cam_save_btn']; ?>
+                </button>
+            </form>
+        </div>
+
+        <!-- ===== Key figures ===== -->
+        <div class="card bg-base-100 shadow-sm "><div class="card-body mb-3" style="max-width:560px;">
+            <h4 class="h4"><?php echo $this->lang->line('building')['mountain_cam_key_figures']; ?></h4>
+            <table class="table table-sm" style="max-width:520px;">
+                <tr>
+                    <td><?php echo $this->lang->line('building')['mountain_cam_status_label']; ?></td>
+                    <td>
+                        <?php if ($is_enabled == 1): ?>
+                            <span class="badge badge-success"><?php echo $this->lang->line('building')['mountain_cam_on']; ?></span>
+                        <?php else: ?>
+                            <span class="badge badge-neutral"><?php echo $this->lang->line('building')['mountain_cam_off']; ?></span>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td><?php echo $this->lang->line('building')['mountain_cam_num_cams_label']; ?></td>
+                    <td><strong><?php echo (int)$num_cams; ?></strong></td>
+                </tr>
+                <tr>
+                    <td><?php echo $this->lang->line('building')['mountain_cam_quality_label']; ?></td>
+                    <td><strong><?php echo $this->lang->line('building')['mountain_cam_quality_' . $cam_quality]; ?></strong></td>
+                </tr>
+                <tr>
+                    <td><?php echo $this->lang->line('building')['mountain_cam_visitor_boost_label']; ?></td>
+                    <td><?php echo $this->lang->line('building')['mountain_cam_visitor_boost_desc']; ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $this->lang->line('building')['mountain_cam_daily_cost_label']; ?></td>
+                    <td><strong><?php echo number_format($actual_daily_cost, 0, ',', ' '); ?> €</strong></td>
+                </tr>
+                <tr>
+                    <td><?php echo $this->lang->line('building')['mountain_cam_rep_bonus_label']; ?></td>
+                    <td>+<?php echo MOUNTAIN_CAM_REP_BONUS_PER_DAY; ?> <?php echo $this->lang->line('building')['mountain_cam_rep_bonus_per_day']; ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $this->lang->line('building')['mountain_cam_stream_label']; ?></td>
+                    <td>
+                        <?php if ($stream_mode == 1): ?>
+                            <span class="badge badge-success"><?php echo $this->lang->line('building')['mountain_cam_on']; ?></span>
+                            <small class="text-base-content/60 ml-1">(+<?php echo (int)(( MOUNTAIN_CAM_STREAM_VISITOR_MULT - 1) * 100); ?>% <?php echo $this->lang->line('building')['mountain_cam_stream_visitor_note']; ?>)</small>
+                        <?php else: ?>
+                            <span class="badge badge-neutral"><?php echo $this->lang->line('building')['mountain_cam_off']; ?></span>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td><?php echo $this->lang->line('building')['mountain_cam_social_label']; ?></td>
+                    <td>
+                        <?php if ($social_media == 1): ?>
+                            <span class="badge badge-success"><?php echo $this->lang->line('building')['mountain_cam_on']; ?></span>
+                            <small class="text-base-content/60 ml-1">(+<?php echo MOUNTAIN_CAM_SOCIAL_REP_BONUS; ?> <?php echo $this->lang->line('building')['mountain_cam_rep_bonus_per_day']; ?>)</small>
+                        <?php else: ?>
+                            <span class="badge badge-neutral"><?php echo $this->lang->line('building')['mountain_cam_off']; ?></span>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td><?php echo $this->lang->line('building')['mountain_cam_night_vision_label']; ?></td>
+                    <td>
+                        <?php if ($night_vision == 1): ?>
+                            <span class="badge badge-success"><?php echo $this->lang->line('building')['mountain_cam_on']; ?></span>
+                            <small class="text-base-content/60 ml-1">(+<?php echo (int)((MOUNTAIN_CAM_NIGHT_VISION_VISITOR_MULT - 1) * 100); ?>% <?php echo $this->lang->line('building')['mountain_cam_stream_visitor_note']; ?>)</small>
+                        <?php else: ?>
+                            <span class="badge badge-neutral"><?php echo $this->lang->line('building')['mountain_cam_off']; ?></span>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td><?php echo $this->lang->line('building')['mountain_cam_weather_overlay_label']; ?></td>
+                    <td>
+                        <?php if ($weather_overlay == 1): ?>
+                            <span class="badge badge-success"><?php echo $this->lang->line('building')['mountain_cam_on']; ?></span>
+                            <small class="text-base-content/60 ml-1">(+<?php echo MOUNTAIN_CAM_WEATHER_OVERLAY_REP_BONUS; ?> <?php echo $this->lang->line('building')['mountain_cam_rep_bonus_per_day']; ?>)</small>
+                        <?php else: ?>
+                            <span class="badge badge-neutral"><?php echo $this->lang->line('building')['mountain_cam_off']; ?></span>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</div>

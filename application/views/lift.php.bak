@@ -1,0 +1,176 @@
+<div class="card bg-base-100 shadow-sm "><div class="card-body mb-3">
+    <?php
+    if (!isset($action) || $action != 'lift_not_found'): // if lift in URL doesn't exist
+        echo $header;
+        ?>
+        <div class="grid grid-cols-12 gap-3">
+            <div class="md:col-span-6">
+                <div class="lift-info">
+                    <p><strong><?php echo $this->lang->line('lift')['diff_type_column']; ?>:</strong> <?php echo $lift_type; ?></p>
+                    <p><strong><?php echo $this->lang->line('lift')['grip_type']; ?>:</strong> <?php echo $grip_type; ?></p>
+                    <p><strong><?php echo $this->lang->line('slope')['length']; ?>:</strong> <?php echo $length; ?> m</p>
+                    <p>
+                        <strong><?php echo $this->lang->line('home')['status']; ?>:</strong>
+                        <span class="lift-status <?php echo strtolower(str_replace(' ', '-', $pre_lift_status)); ?>">
+                            <?php echo $pre_lift_status; ?>
+                            <div style="display:inline;" data-countdown="<?php echo $lift_status; ?>">
+                                <?php echo $lift_status; ?>
+                            </div>
+                            <?php echo $post_lift_status; ?>
+                        </span>
+                    </p>
+                    <?php if (isset($var_lift_is_built) && $var_lift_is_built): ?>
+                        <p><strong><?php echo $this->lang->line('lift')['length_speed_column']; ?>:</strong> <?php echo $lift_speed; ?> <?php echo $this->lang->line('lift')['speed_unit']; ?></p>
+                        <p><strong><?php echo $this->lang->line('lift')['capacity_seats']; ?>:</strong> <?php echo $lift_capacity; ?></p>
+                        <p><strong><?php echo $this->lang->line('lift')['throughput']; ?>:</strong> <?php echo $lift_throughput; ?> <?php echo $this->lang->line('lift')['throughput_unit']; ?></p>
+                        <p><strong><?php echo $this->lang->line('slope')['condition']; ?>:</strong> <?php echo $lift_condition; ?></p>
+                        <?php if (isset($lift_age_years)): ?>
+                            <p>
+                                <strong><?php echo $this->lang->line('lift')['age']; ?>:</strong>
+                                <?php echo $lift_age_years; ?> <?php echo $this->lang->line('lift')['age_unit']; ?>
+                                <?php if ($lift_age_years >= $lift_max_age_seasons): ?>
+                                    <span class="badge badge-error"><?php echo $this->lang->line('lift')['end_of_life_badge']; ?></span>
+                                <?php endif; ?>
+                            </p>
+                            <p><strong><?php echo $this->lang->line('lift')['wear']; ?>:</strong> <?php echo $lift_wear_pct; ?> %</p>
+                            <?php if ($lift_efficiency_penalty > 0): ?>
+                                <p><strong><?php echo $this->lang->line('lift')['efficiency_penalty']; ?>:</strong> -<?php echo $lift_efficiency_penalty; ?> %</p>
+                            <?php endif; ?>
+                            <?php if ($lift_cost_multiplier > 1): ?>
+                                <p><strong><?php echo $this->lang->line('lift')['maintenance_multiplier']; ?>:</strong> ×<?php echo number_format($lift_cost_multiplier, 2); ?></p>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <div class="md:col-span-6 text-center">
+                <div class="tooltip tooltip-bottom" data-tip="<?php echo $lift_type; ?>">
+                    <img src="<?php echo base_url('img/images/' . $lift_type_img_name . '.png'); ?>" alt="<?php echo $lift_type; ?>" class="lift-image" />
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-3">
+            <div class="md:col-span-12">
+                <?php if (isset($action) && $action == 'sector_locked'): ?>
+                    <div class="alert alert-warning"><?php echo $this->lang->line('resort')['sector_locked_lift']; ?></div>
+                <?php elseif (isset($action) && $action == 'ongoing_construction_lift'): ?>
+                    <div class="alert alert-info"><?php echo $this->lang->line('lift')['ongoing_construction_lift']; ?></div>
+                <?php else: ?>
+                    <?php if (isset($body_data)): ?>
+                        <div class="body-content"><?php echo $body_data; ?></div>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div id="chars" class="hidden"></div>
+        <div class="grid grid-cols-12 gap-3">
+            <div class="md:col-span-12">
+                <?php
+                if (isset($errors)) echo '<div class="alert alert-error">' . $errors . '</div>';
+                if (isset($infoMessage)) echo '<div class="alert alert-info">' . $infoMessage . '</div>';
+                if (isset($table_levels)) echo '<br>' . $table_levels;
+                if (isset($modular_upgrades_section)) echo '<br>' . $modular_upgrades_section;
+                ?>
+            </div>
+        </div>
+
+        <div id="dialog-confirm-repair_lift" style="display:none;">
+            <?php echo $this->lang->line('lift')['confirm_destroy_item_part1']; ?>
+            <?php echo $repair_cost; ?>
+            <?php echo $this->lang->line('lift')['confirm_destroy_item_part2']; ?>
+        </div>
+
+    <?php endif; ?>
+</div>
+
+<style>
+    .container-border {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-top: 20px; /* Add some top margin for spacing */
+        border-radius: 5px; /* Optional: Add rounded corners */
+        background-color: #f9f9f9; /* Optional: Add a light background */
+    }
+
+    .lift-info strong {
+        font-weight: bold;
+        margin-right: 5px;
+    }
+
+    .lift-status {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .lift-status.operational {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .lift-status.maintenance {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+
+    .lift-status.closed {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    .lift-image {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .body-content {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #fff;
+        border: 1px solid #eee;
+        border-radius: 5px;
+    }
+
+    .alert {
+        margin-top: 10px;
+        padding: 10px 15px;
+        border-radius: 5px;
+    }
+
+    .alert-error {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+    }
+
+    .alert-info {
+        background-color: #d1ecf1;
+        border-color: #bee5eb;
+        color: #0c5460;
+    }
+
+    .alert-warning {
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+        color: #856404;
+    }
+</style>
+
+<script>
+    $(function () {
+        if (typeof smInitTooltips === 'function') { smInitTooltips(document); }
+    });
+
+    // You might need to adapt this based on how your countdown timer works
+    // Example: If you are using a library like jQuery Countdown
+    // $('[data-countdown]').each(function () {
+    //     var $this = $(this), finalDate = $(this).data('countdown');
+    //     $this.countdown(finalDate, function (event) {
+    //         $this.html(event.strftime('%D days %H:%M:%S'));
+    //     });
+    // });
+</script>

@@ -1,0 +1,316 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500">
+  <defs>
+    <!-- Sky -->
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B8D9F0"/>
+      <stop offset="60%" stop-color="#DAF0FB"/>
+      <stop offset="100%" stop-color="#EEF8FF"/>
+    </linearGradient>
+    <!-- Distant flat fields -->
+    <linearGradient id="fieldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C8DCBA"/>
+      <stop offset="100%" stop-color="#B0C89A"/>
+    </linearGradient>
+    <!-- Hill snow -->
+    <linearGradient id="hillGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F5FAFF"/>
+      <stop offset="60%" stop-color="#E8F4FF"/>
+      <stop offset="100%" stop-color="#D8EEF8"/>
+    </linearGradient>
+    <!-- Hill shadow / depth -->
+    <linearGradient id="hillShadow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#C8DFF0" stop-opacity="0.5"/>
+      <stop offset="40%" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#C0D8EC" stop-opacity="0.4"/>
+    </linearGradient>
+    <!-- Base area ground -->
+    <linearGradient id="baseGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E0EED8"/>
+      <stop offset="100%" stop-color="#C4D8B0"/>
+    </linearGradient>
+    <!-- Lodge roof -->
+    <linearGradient id="lodgeRoof" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B3A2A"/>
+      <stop offset="100%" stop-color="#6B2A1A"/>
+    </linearGradient>
+    <!-- Terrain park run -->
+    <linearGradient id="parkGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E0F0FF"/>
+      <stop offset="100%" stop-color="#C8E4F8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ═══ SKY ═══ -->
+  <rect width="1000" height="500" fill="url(#skyGrad)"/>
+
+  <!-- Distant horizon clouds -->
+  <ellipse cx="200" cy="85" rx="90" ry="22" fill="white" opacity="0.55"/>
+  <ellipse cx="250" cy="80" rx="60" ry="18" fill="white" opacity="0.6"/>
+  <ellipse cx="750" cy="90" rx="80" ry="20" fill="white" opacity="0.5"/>
+  <ellipse cx="800" cy="84" rx="55" ry="16" fill="white" opacity="0.55"/>
+  <ellipse cx="540" cy="70" rx="70" ry="18" fill="white" opacity="0.4"/>
+
+  <!-- ═══ DISTANT FLAT FIELDS (far horizon) ═══ -->
+  <rect x="0" y="390" width="1000" height="110" fill="url(#fieldGrad)"/>
+  <!-- Fence line along road -->
+  <line x1="0" y1="392" x2="120" y2="392" stroke="#8B7A5A" stroke-width="1.5" opacity="0.6"/>
+  <line x1="880" y1="392" x2="1000" y2="392" stroke="#8B7A5A" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- ═══ MAIN HILL (gentle midwest dome) ═══
+       Game coords: peak ≈ (490, 420), base ≈ y=90
+       SVG: peak ≈ SVG(490, 80), base ≈ SVG y=410 -->
+  <path d="M 95,410
+           Q 130,380 160,350
+           Q 220,290 280,230
+           Q 340,175 390,135
+           Q 430,105 490,82
+           Q 550,105 590,135
+           Q 640,170 700,225
+           Q 760,280 820,345
+           Q 860,385 905,410
+           Z"
+        fill="url(#hillGrad)" stroke="#C8DCEC" stroke-width="1"/>
+
+  <!-- Hill shadow overlay for depth -->
+  <path d="M 95,410
+           Q 130,380 160,350
+           Q 220,290 280,230
+           Q 340,175 390,135
+           Q 430,105 490,82
+           Q 550,105 590,135
+           Q 640,170 700,225
+           Q 760,280 820,345
+           Q 860,385 905,410
+           Z"
+        fill="url(#hillShadow)" opacity="0.7"/>
+
+  <!-- ═══ SKI RUNS (subtle grooming stripes on hill) ═══ -->
+
+  <!-- Run 1: "Prairie Run" - center-left, wide intermediate -->
+  <path d="M 415,395 Q 413,340 410,285 Q 408,225 412,175 Q 416,135 422,105"
+        fill="none" stroke="white" stroke-width="14" opacity="0.55"/>
+  <path d="M 415,395 Q 413,340 410,285 Q 408,225 412,175 Q 416,135 422,105"
+        fill="none" stroke="#D8EEFF" stroke-width="8" opacity="0.4"/>
+
+  <!-- Run 2: "Midwest Express" - just left of center -->
+  <path d="M 375,395 Q 373,340 370,280 Q 368,220 373,170 Q 377,135 382,108"
+        fill="none" stroke="white" stroke-width="12" opacity="0.5"/>
+  <path d="M 375,395 Q 373,340 370,280 Q 368,220 373,170 Q 377,135 382,108"
+        fill="none" stroke="#D8EEFF" stroke-width="6" opacity="0.35"/>
+
+  <!-- Run 3: "Blue Cruiser" - center-right -->
+  <path d="M 530,393 Q 528,338 526,278 Q 524,218 528,170 Q 533,135 540,108"
+        fill="none" stroke="white" stroke-width="13" opacity="0.52"/>
+  <path d="M 530,393 Q 528,338 526,278 Q 524,218 528,170 Q 533,135 540,108"
+        fill="none" stroke="#D8EEFF" stroke-width="7" opacity="0.35"/>
+
+  <!-- Run 4: "The Headwall" - near summit center, slightly steeper look -->
+  <path d="M 480,393 Q 478,345 476,290 Q 474,235 476,185 Q 479,145 483,110"
+        fill="none" stroke="white" stroke-width="10" opacity="0.45"/>
+
+  <!-- Run 5: "Backside Burn" - upper right slope -->
+  <path d="M 640,390 Q 643,345 648,295 Q 652,250 658,210 Q 662,180 668,155"
+        fill="none" stroke="white" stroke-width="11" opacity="0.48"/>
+  <path d="M 640,390 Q 643,345 648,295 Q 652,250 658,210 Q 662,180 668,155"
+        fill="none" stroke="#D8EEFF" stroke-width="5" opacity="0.3"/>
+
+  <!-- Easy Rider beginner (far left, gentler slope) -->
+  <path d="M 210,398 Q 207,368 204,335 Q 200,295 202,258 Q 205,228 208,205"
+        fill="none" stroke="white" stroke-width="18" opacity="0.55"/>
+  <path d="M 210,398 Q 207,368 204,335 Q 200,295 202,258 Q 205,228 208,205"
+        fill="none" stroke="#E8F8FF" stroke-width="10" opacity="0.45"/>
+
+  <!-- Magic Carpet run (leftmost bunny, very wide, gentle) -->
+  <path d="M 165,400 Q 163,378 161,355 Q 158,330 160,310 Q 162,293 165,282"
+        fill="none" stroke="white" stroke-width="22" opacity="0.5"/>
+
+  <!-- ═══ TERRAIN PARK AREA (right side) ═══ -->
+  <!-- Park corridor -->
+  <path d="M 755,392 Q 762,355 768,315 Q 773,275 775,245 Q 776,230 778,218"
+        fill="none" stroke="white" stroke-width="28" opacity="0.45"/>
+  <path d="M 755,392 Q 762,355 768,315 Q 773,275 775,245 Q 776,230 778,218"
+        fill="none" stroke="url(#parkGrad)" stroke-width="18" opacity="0.5"/>
+
+  <!-- Jump 1 -->
+  <path d="M 748,370 Q 755,362 762,357 Q 768,355 772,358" fill="none" stroke="#88BBDD" stroke-width="3" opacity="0.8"/>
+  <ellipse cx="758" cy="362" rx="10" ry="4" fill="#A8D4EE" opacity="0.7"/>
+
+  <!-- Jump 2 -->
+  <path d="M 754,340 Q 761,332 768,327 Q 774,325 778,328" fill="none" stroke="#88BBDD" stroke-width="3" opacity="0.8"/>
+  <ellipse cx="764" cy="332" rx="10" ry="4" fill="#A8D4EE" opacity="0.7"/>
+
+  <!-- Jump 3 (box) -->
+  <rect x="758" y="302" width="18" height="5" rx="2" fill="#A0C8E8" opacity="0.8"/>
+
+  <!-- Jump 4 -->
+  <path d="M 760,282 Q 766,274 773,269 Q 779,267 782,270" fill="none" stroke="#88BBDD" stroke-width="3" opacity="0.8"/>
+  <ellipse cx="769" cy="274" rx="10" ry="4" fill="#A8D4EE" opacity="0.7"/>
+
+  <!-- Boardercross lane (far right) -->
+  <path d="M 835,390 Q 840,358 845,320 Q 849,282 848,255 Q 847,238 845,225"
+        fill="none" stroke="white" stroke-width="14" opacity="0.4"/>
+
+  <!-- ═══ TREE CLUSTERS ═══ -->
+  <!-- Left tree bank -->
+  <g opacity="0.85">
+    <polygon points="115,355  125,325  135,355" fill="#2D5A27"/>
+    <polygon points="120,345  132,308  144,345" fill="#336E2C"/>
+    <polygon points="130,352  142,318  154,352" fill="#2D5A27"/>
+    <polygon points="105,368  118,338  131,368" fill="#254D20"/>
+    <polygon points="140,348  153,315  166,348" fill="#2D5A27"/>
+    <polygon points="108,380  120,355  132,380" fill="#336E2C"/>
+    <polygon points="148,358  160,328  172,358" fill="#254D20"/>
+    <polygon points="95,372   108,345  121,372" fill="#2D5A27"/>
+  </g>
+
+  <!-- Right tree bank -->
+  <g opacity="0.85">
+    <polygon points="858,358  870,326  882,358" fill="#2D5A27"/>
+    <polygon points="870,350  882,316  894,350" fill="#336E2C"/>
+    <polygon points="882,360  894,326  906,360" fill="#2D5A27"/>
+    <polygon points="855,372  868,340  881,372" fill="#254D20"/>
+    <polygon points="895,353  908,320  921,353" fill="#2D5A27"/>
+    <polygon points="865,380  878,354  891,380" fill="#336E2C"/>
+    <polygon points="904,365  917,332  930,365" fill="#254D20"/>
+    <polygon points="848,368  862,338  876,368" fill="#2D5A27"/>
+  </g>
+
+  <!-- Mid-hill tree cluster (separates terrain park from main runs) -->
+  <g opacity="0.75">
+    <polygon points="698,295  706,273  714,295" fill="#2D5A27"/>
+    <polygon points="704,300  713,276  722,300" fill="#336E2C"/>
+    <polygon points="712,293  720,270  728,293" fill="#2D5A27"/>
+    <polygon points="700,305  709,282  718,305" fill="#254D20"/>
+  </g>
+
+  <!-- Left tree cluster (separates beginner from main) -->
+  <g opacity="0.75">
+    <polygon points="238,335  246,313  254,335" fill="#2D5A27"/>
+    <polygon points="245,340  254,316  263,340" fill="#336E2C"/>
+    <polygon points="252,332  261,308  270,332" fill="#2D5A27"/>
+  </g>
+
+  <!-- ═══ MAIN CHAIRLIFT (Summit Quad) ═══ -->
+  <!-- Cable line from base to summit -->
+  <line x1="455" y1="408" x2="460" y2="88" stroke="#555" stroke-width="1.5" opacity="0.7"/>
+  <!-- Tower poles -->
+  <line x1="456" y1="370" x2="456" y2="395" stroke="#666" stroke-width="3" opacity="0.8"/>
+  <line x1="458" y1="305" x2="458" y2="330" stroke="#666" stroke-width="3" opacity="0.8"/>
+  <line x1="459" y1="240" x2="459" y2="265" stroke="#666" stroke-width="3" opacity="0.8"/>
+  <line x1="459" y1="175" x2="459" y2="200" stroke="#666" stroke-width="3" opacity="0.8"/>
+  <line x1="460" y1="118" x2="460" y2="140" stroke="#666" stroke-width="3" opacity="0.8"/>
+  <!-- Tower crossbars -->
+  <line x1="449" y1="370" x2="463" y2="370" stroke="#666" stroke-width="2" opacity="0.7"/>
+  <line x1="451" y1="305" x2="465" y2="305" stroke="#666" stroke-width="2" opacity="0.7"/>
+  <line x1="452" y1="240" x2="466" y2="240" stroke="#666" stroke-width="2" opacity="0.7"/>
+  <line x1="452" y1="175" x2="466" y2="175" stroke="#666" stroke-width="2" opacity="0.7"/>
+  <line x1="453" y1="118" x2="467" y2="118" stroke="#666" stroke-width="2" opacity="0.7"/>
+  <!-- Chairs (small rectangles hanging on cable) -->
+  <rect x="451" y="348" width="9" height="5" rx="1" fill="#E8E8E8" stroke="#888" stroke-width="0.5" opacity="0.9"/>
+  <rect x="453" y="282" width="9" height="5" rx="1" fill="#E8E8E8" stroke="#888" stroke-width="0.5" opacity="0.9"/>
+  <rect x="454" y="215" width="9" height="5" rx="1" fill="#E8E8E8" stroke="#888" stroke-width="0.5" opacity="0.9"/>
+  <rect x="455" y="151" width="9" height="5" rx="1" fill="#E8E8E8" stroke="#888" stroke-width="0.5" opacity="0.9"/>
+
+  <!-- ═══ TERRAIN PARK DOUBLE CHAIR ═══ -->
+  <line x1="735" y1="405" x2="748" y2="220" stroke="#555" stroke-width="1.2" opacity="0.65"/>
+  <line x1="726" y1="350" x2="726" y2="370" stroke="#666" stroke-width="2.5" opacity="0.7"/>
+  <line x1="730" y1="290" x2="730" y2="310" stroke="#666" stroke-width="2.5" opacity="0.7"/>
+  <line x1="733" y1="240" x2="733" y2="258" stroke="#666" stroke-width="2.5" opacity="0.7"/>
+  <line x1="719" y1="350" x2="733" y2="350" stroke="#666" stroke-width="1.5" opacity="0.6"/>
+  <line x1="723" y1="290" x2="737" y2="290" stroke="#666" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- ═══ BUNNY HILL SURFACE LIFT (Magic Carpet indicator) ═══ -->
+  <line x1="160" y1="402" x2="162" y2="282" stroke="#888" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+  <rect x="155" y="398" width="12" height="8" rx="2" fill="#CCC" opacity="0.7"/>
+  <rect x="157" y="276" width="10" height="7" rx="2" fill="#CCC" opacity="0.7"/>
+
+  <!-- ═══ TERRAIN PARK LABEL SIGN ═══ -->
+  <rect x="780" y="245" width="52" height="16" rx="3" fill="#FF8C00" opacity="0.85"/>
+  <text x="806" y="257" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="white">PARK</text>
+
+  <!-- ═══ BASE AREA ═══ -->
+  <!-- Flat base pad -->
+  <rect x="90" y="408" width="820" height="18" rx="0" fill="url(#baseGrad)" opacity="0.8"/>
+
+  <!-- ═══ BASE LODGE ═══ -->
+  <!-- Lodge body -->
+  <rect x="408" y="424" width="184" height="54" rx="3" fill="#D4B896"/>
+  <!-- Lodge roof (A-frame) -->
+  <polygon points="395,424  500,400  605,424" fill="url(#lodgeRoof)"/>
+  <!-- Chimney -->
+  <rect x="555" y="395" width="10" height="20" fill="#7A3020"/>
+  <!-- Windows -->
+  <rect x="425" y="432" width="22" height="18" rx="2" fill="#A8C8E8" opacity="0.9"/>
+  <rect x="457" y="432" width="22" height="18" rx="2" fill="#A8C8E8" opacity="0.9"/>
+  <rect x="520" y="432" width="22" height="18" rx="2" fill="#A8C8E8" opacity="0.9"/>
+  <rect x="552" y="432" width="22" height="18" rx="2" fill="#A8C8E8" opacity="0.9"/>
+  <!-- Door -->
+  <rect x="485" y="448" width="30" height="30" rx="2" fill="#8B6040"/>
+  <!-- Lodge sign -->
+  <rect x="447" y="420" width="106" height="13" rx="2" fill="#6B2A1A" opacity="0.85"/>
+  <text x="500" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#FFD700">PRAIRIE PEAK LODGE</text>
+
+  <!-- Ski rental / side building -->
+  <rect x="618" y="438" width="75" height="40" rx="2" fill="#C4A882"/>
+  <polygon points="610,438  655,423  730,438" fill="#7A3020" opacity="0.85"/>
+  <text x="655" y="460" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#555">RENTALS</text>
+
+  <!-- Ticket window -->
+  <rect x="322" y="442" width="60" height="36" rx="2" fill="#C4A882"/>
+  <polygon points="315,442  352,428  388,442" fill="#7A3020" opacity="0.85"/>
+  <text x="352" y="462" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#555">TICKETS</text>
+
+  <!-- ═══ LIFT BASE STATIONS ═══ -->
+  <!-- Summit Quad base station -->
+  <rect x="438" y="406" width="36" height="14" rx="2" fill="#B8B8B8" opacity="0.9"/>
+  <text x="456" y="416" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#333">QUAD</text>
+
+  <!-- Summit (top terminal) -->
+  <rect x="448" y="76" width="26" height="14" rx="2" fill="#B8B8B8" opacity="0.85"/>
+  <text x="461" y="86" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" fill="#333">TOP</text>
+
+  <!-- Park chair base -->
+  <rect x="720" y="404" width="30" height="12" rx="2" fill="#B8B8B8" opacity="0.9"/>
+  <text x="735" y="414" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#333">PARK</text>
+
+  <!-- ═══ PARKING LOT (bottom right) ═══ -->
+  <rect x="730" y="440" width="200" height="50" rx="3" fill="#B8BEC8" opacity="0.7"/>
+  <!-- Parking lot lines -->
+  <line x1="750" y1="440" x2="750" y2="490" stroke="white" stroke-width="1" opacity="0.7"/>
+  <line x1="770" y1="440" x2="770" y2="490" stroke="white" stroke-width="1" opacity="0.7"/>
+  <line x1="790" y1="440" x2="790" y2="490" stroke="white" stroke-width="1" opacity="0.7"/>
+  <line x1="810" y1="440" x2="810" y2="490" stroke="white" stroke-width="1" opacity="0.7"/>
+  <line x1="830" y1="440" x2="830" y2="490" stroke="white" stroke-width="1" opacity="0.7"/>
+  <line x1="850" y1="440" x2="850" y2="490" stroke="white" stroke-width="1" opacity="0.7"/>
+  <line x1="870" y1="440" x2="870" y2="490" stroke="white" stroke-width="1" opacity="0.7"/>
+  <line x1="890" y1="440" x2="890" y2="490" stroke="white" stroke-width="1" opacity="0.7"/>
+  <line x1="910" y1="440" x2="910" y2="490" stroke="white" stroke-width="1" opacity="0.7"/>
+  <text x="830" y="469" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#555" opacity="0.8">PARKING</text>
+
+  <!-- ═══ NORDIC TRAIL LOOP (flat base area) ═══ -->
+  <path d="M 95,428 Q 120,440 160,448 Q 280,462 380,468 Q 500,472 620,468 Q 720,462 790,450 Q 840,443 870,436"
+        fill="none" stroke="#5A9A6A" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.7"/>
+  <text x="270" y="476" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#4A8A5A" opacity="0.9">NORDIC TRAIL →</text>
+
+  <!-- ═══ SUMMIT MARKER ═══ -->
+  <circle cx="490" cy="85" r="5" fill="#E8F4FF" stroke="#99BBDD" stroke-width="1.5" opacity="0.85"/>
+  <text x="504" y="82" font-family="Arial, sans-serif" font-size="9" fill="#446688" font-weight="bold" opacity="0.9">▲ 820ft</text>
+
+  <!-- ═══ DIFFICULTY MARKERS on runs ═══ -->
+  <!-- Green circle = beginner (left runs) -->
+  <circle cx="178" cy="350" r="7" fill="#2E8B2E" opacity="0.85"/>
+  <!-- Blue square = intermediate (center runs) -->
+  <rect x="392" y="240" width="13" height="13" rx="1" fill="#2255BB" opacity="0.85"/>
+  <!-- Black diamond = advanced (upper center) -->
+  <polygon points="460,160  468,168  460,176  452,168" fill="#111" opacity="0.85"/>
+  <!-- Orange diamond = terrain park -->
+  <polygon points="762,340  770,348  762,356  754,348" fill="#FF7700" opacity="0.9"/>
+
+  <!-- ═══ SNOWMAKING GUNS (small markers) ═══ -->
+  <circle cx="380" cy="382" r="3" fill="#AAD0E8" opacity="0.8"/>
+  <circle cx="415" cy="370" r="3" fill="#AAD0E8" opacity="0.8"/>
+  <circle cx="525" cy="375" r="3" fill="#AAD0E8" opacity="0.8"/>
+  <circle cx="635" cy="365" r="3" fill="#AAD0E8" opacity="0.8"/>
+  <circle cx="205" cy="390" r="3" fill="#AAD0E8" opacity="0.8"/>
+
+</svg>

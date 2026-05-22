@@ -1,0 +1,30 @@
+# Dependabot version update configuration
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+#
+# Ecosystems tracked:
+#   - github-actions: webfactory/ssh-agent used in .github/workflows/deploy.yml
+#
+# Not tracked (no root manifest present):
+#   - composer: TCPDF is manually vendored into application/libraries/tcpdf/
+#     with its own composer.json but no root composer.json or composer.lock.
+#     Add a root composer.json if you want Dependabot to track PHP dependencies.
+#   - npm: no package.json at root; add one if a frontend build step is introduced.
+
+version: 2
+updates:
+
+  # ── GitHub Actions ────────────────────────────────────────────────────────
+  # Keeps action versions in deploy.yml (and any future workflows) up to date.
+  # Currently tracks: webfactory/ssh-agent
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Paris"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "chore(ci)"
